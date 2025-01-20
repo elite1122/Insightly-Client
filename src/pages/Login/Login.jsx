@@ -10,7 +10,7 @@ import { Helmet } from "react-helmet-async";
 
 
 const Login = () => {
-    const { signIn, user } = useAuth();
+    const { signIn, user, loading } = useAuth();
     const navigate = useNavigate();
     const location = useLocation();
     const [email, setEmail] = useState("");
@@ -37,12 +37,10 @@ const Login = () => {
                     showConfirmButton: false,
                     timer: 1500
                 });
-                // Navigate to the intended route or default to home
                 const redirectTo = location.state?.from?.pathname || "/";
                 navigate(redirectTo, { replace: true });
             })
             .catch((error) => {
-                // Display the actual error message
                 Swal.fire({
                     position: "top-end",
                     icon: "error",
@@ -57,73 +55,74 @@ const Login = () => {
         <section>
             <Helmet><title>Insightly | Sign In</title></Helmet>
             <div className="min-h-screen flex justify-center items-center">
-                <div className="card w-full max-w-xl shadow-2xl p-10">
-                    <SectionTitle heading="sign in" subHeading='Welcome! Log into your account'></SectionTitle>
-                    <form onSubmit={handleSubmit} className="card-body">
-                        {/* Email Input */}
-                        <div className="form-control">
-                            <label className="label">
-                                <span className="">Email</span>
-                            </label>
-                            <input
-                                name="email"
-                                type="email"
-                                placeholder="Enter your email"
-                                className="input input-bordered bg-white text-black dark:bg-gray-800 dark:text-white"
-                                value={email}
-                                onChange={(e) => setEmail(e.target.value)}
-                                required
-                            />
-                        </div>
+                {loading ? (
+                    <div className="flex justify-center items-center min-h-screen">
+                        <span className="loading loading-bars loading-lg"></span>
+                    </div>
+                ) : (
+                    <div className="card w-full max-w-xl shadow-2xl p-10">
+                        <SectionTitle heading="sign in" subHeading="Welcome! Log into your account"></SectionTitle>
+                        <form onSubmit={handleSubmit} className="card-body">
+                            <div className="form-control">
+                                <label className="label">
+                                    <span className="">Email</span>
+                                </label>
+                                <input
+                                    name="email"
+                                    type="email"
+                                    placeholder="Enter your email"
+                                    className="input input-bordered bg-white text-black"
+                                    value={email}
+                                    onChange={(e) => setEmail(e.target.value)}
+                                    required
+                                />
+                            </div>
 
-                        {/* Password Input */}
-                        <div className="form-control relative">
-                            <label className="label">
-                                <span className="">Password</span>
-                            </label>
-                            <input
-                                name="password"
-                                type={showPassword ? "text" : "password"}
-                                placeholder="Enter your password"
-                                className="input input-bordered bg-white text-black"
-                                required
-                            />
-                            <button
-                                type="button"
-                                onClick={() => setShowPassword(!showPassword)}
-                                className="btn btn-xs absolute right-2 top-12 bg-white text-black"
-                            >
-                                {showPassword ? <FaEyeSlash /> : <FaEye />}
-                            </button>
-                            <label className="label">
-                                <p
-                                    className="label-text-alt link link-hover text-black"
+                            <div className="form-control relative">
+                                <label className="label">
+                                    <span className="">Password</span>
+                                </label>
+                                <input
+                                    name="password"
+                                    type={showPassword ? "text" : "password"}
+                                    placeholder="Enter your password"
+                                    className="input input-bordered bg-white text-black"
+                                    required
+                                />
+                                <button
+                                    type="button"
+                                    onClick={() => setShowPassword(!showPassword)}
+                                    className="btn btn-xs absolute right-2 top-12 bg-white text-black"
                                 >
-                                    Forgot password?
-                                </p>
-                            </label>
-                        </div>
+                                    {showPassword ? <FaEyeSlash /> : <FaEye />}
+                                </button>
+                                <label className="label">
+                                    <p className="label-text-alt link link-hover text-black">
+                                        Forgot password?
+                                    </p>
+                                </label>
+                            </div>
 
-                        {/* Login Button */}
-                        <div className="form-control mt-6">
-                            <button type="submit" className="btn btn-primary">
-                                Login
-                            </button>
-                        </div>
-                    </form>
+                            <div className="form-control mt-6">
+                                <button type="submit" className="btn btn-primary">
+                                    Login
+                                </button>
+                            </div>
+                        </form>
 
-                    {/* Register and Google Sign-In */}
-                    <p className="text-center font-semibold">
-                        Don't Have An Account?{" "}
-                        <span className="text-blue-600">
-                            <Link to="/register">Register</Link>
-                        </span>
-                    </p>
-                    <SocialLogin></SocialLogin>
-                </div>
+                        <p className="text-center font-semibold">
+                            Don't Have An Account?{" "}
+                            <span className="text-blue-600">
+                                <Link to="/register">Register</Link>
+                            </span>
+                        </p>
+                        <SocialLogin />
+                    </div>
+                )}
             </div>
         </section>
     );
 };
 
 export default Login;
+
