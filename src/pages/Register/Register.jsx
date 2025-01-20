@@ -7,8 +7,10 @@ import SectionTitle from "../../component/SectionTitle/SectionTitle";
 import SocialLogin from "../../component/SocialLogin/SocialLogin";
 import { useEffect, useState } from "react";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
+import useAxiosPublic from "../../hooks/useAxiosPublic";
 
 const Register = () => {
+    const axiosPublic = useAxiosPublic();
     const { register, handleSubmit, reset, formState: { errors } } = useForm();
     const { createUser, updateUserProfile, user, loading } = useAuth();
     const navigate = useNavigate();
@@ -21,29 +23,40 @@ const Register = () => {
         }
     }, [user, navigate]);
 
-    const onSubmit = (data) => {
-        console.log(data);
+    const onSubmit = data => {
+
         createUser(data.email, data.password)
             .then(result => {
                 const loggedUser = result.user;
                 console.log(loggedUser);
-                return updateUserProfile(data.name, data.photoURL);
-            })
-            .then(() => {
-                console.log('User profile info updated');
-                reset();
-                Swal.fire({
-                    position: 'top-end',
-                    icon: 'success',
-                    title: 'User created successfully.',
-                    showConfirmButton: false,
-                    timer: 1500
-                });
-                navigate('/');
-            })
-            .catch(error => console.error(error));
-    };
+                updateUserProfile(data.name, data.photoURL)
+                    .then(() => {
+                        // create user entry in the database
+                        const userInfo = {
+                            name: data.name,
+                            email: data.email
+                        }
+                        axiosPublic.post('/users', userInfo)
+                            .then(res => {
+                                if (res.data.insertedId) {
+                                    console.log('user added to the database')
+                                    reset();
+                                    Swal.fire({
+                                        position: 'top-end',
+                                        icon: 'success',
+                                        title: 'User created successfully.',
+                                        showConfirmButton: false,
+                                        timer: 1500
+                                    });
+                                    navigate('/');
+                                }
+                            })
 
+
+                    })
+                    .catch(error => console.log(error))
+            })
+    };
     return (
         <section>
             <Helmet>
