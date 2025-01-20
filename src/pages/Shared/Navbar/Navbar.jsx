@@ -1,81 +1,120 @@
 import { Link, NavLink } from 'react-router-dom';
 import logo from '../../../assets/insightly.png'
+import useAuth from '../../../hooks/useAuth';
 
 const Navbar = () => {
 
+    const { user, logOut, loading } = useAuth();
+
+    if (loading) {
+        return <div className="flex justify-center items-center min-h-screen"><span className="loading loading-bars loading-lg"></span></div>;
+    }
+
     const navOptions = <>
-        <NavLink
-            to="/"
-            className={({ isActive }) =>
-                isActive ? "text-blue-500 font-bold border-0 border-b-blue-500 lg:border-b-4" : ""
-            }
-        >
-            Home
-        </NavLink>
-        <NavLink
-            to="/addArticles"
-            className={({ isActive }) =>
-                isActive ? "text-blue-500 font-bold border-0 border-b-blue-500 lg:border-b-4" : ""
-            }
-        >
-            Add Articles
-        </NavLink>
-        <NavLink
-            to="/subscription"
-            className={({ isActive }) =>
-                isActive ? "text-blue-500 font-bold border-0 border-b-blue-500 lg:border-b-4" : ""
-            }
-        >
-            Subscription
-        </NavLink>
-        <NavLink
-            to="/dashboard"
-            className={({ isActive }) =>
-                isActive ? "text-blue-500 font-bold border-0 border-b-blue-500 lg:border-b-4" : ""
-            }
-        >
-            Dashboard
-        </NavLink>
-        <NavLink
-            to="/myArticles"
-            className={({ isActive }) =>
-                isActive ? "text-blue-500 font-bold border-0 border-b-blue-500 lg:border-b-4" : ""
-            }
-        >
-            My Articles
-        </NavLink>
-        <NavLink
-            to="/premiumArticles"
-            className={({ isActive }) =>
-                isActive ? "text-blue-500 font-bold border-0 border-b-blue-500 lg:border-b-4" : ""
-            }
-        >
-            Premium Articles
-        </NavLink>
-        <NavLink
-            to="/login"
-            className={({ isActive }) =>
-                isActive
-                    ? "hidden lg:flex btn btn-primary text-white"
-                    : "hidden lg:flex btn btn-outline text-gray-700 dark:text-white"
-            }
-        >
-            Login
-        </NavLink>
-        <NavLink
-            to="/register"
-            className={({ isActive }) =>
-                isActive
-                    ? "hidden lg:flex btn btn-primary text-white"
-                    : "hidden lg:flex btn btn-outline text-gray-700 dark:text-white"
-            }
-        >
-            Register
-        </NavLink>
+        <div className='flex flex-col lg:flex-row gap-3'>
+            <NavLink
+                to="/"
+                className={({ isActive }) =>
+                    isActive ? "text-blue-500 font-bold border-0 border-b-blue-500 lg:border-b-4" : ""
+                }
+            >
+                Home
+            </NavLink>
+            <NavLink
+                to="/addArticles"
+                className={({ isActive }) =>
+                    isActive ? "text-blue-500 font-bold border-0 border-b-blue-500 lg:border-b-4" : ""
+                }
+            >
+                Add Articles
+            </NavLink>
+            <NavLink
+                to="/subscription"
+                className={({ isActive }) =>
+                    isActive ? "text-blue-500 font-bold border-0 border-b-blue-500 lg:border-b-4" : ""
+                }
+            >
+                Subscription
+            </NavLink>
+            <NavLink
+                to="/dashboard"
+                className={({ isActive }) =>
+                    isActive ? "text-blue-500 font-bold border-0 border-b-blue-500 lg:border-b-4" : ""
+                }
+            >
+                Dashboard
+            </NavLink>
+            <NavLink
+                to="/myArticles"
+                className={({ isActive }) =>
+                    isActive ? "text-blue-500 font-bold border-0 border-b-blue-500 lg:border-b-4" : ""
+                }
+            >
+                My Articles
+            </NavLink>
+            <NavLink
+                to="/premiumArticles"
+                className={({ isActive }) =>
+                    isActive ? "text-blue-500 font-bold border-0 border-b-blue-500 lg:border-b-4" : ""
+                }
+            >
+                Premium Articles
+            </NavLink>
+        </div>
+        {user?.photoURL ? (
+            <div className="relative group flex flex-col lg:flex-row gap-3">
+                <div
+                    tabIndex="0"
+                    role="button"
+                    className="btn btn-ghost btn-circle avatar group"
+                >
+                    <div className="w-10 rounded-full">
+                        <img
+                            referrerPolicy="no-referrer"
+                            alt="User Avatar"
+                            src={user.photoURL}
+                        />
+                    </div>
+                    {/* Hover Display */}
+                    <span className="absolute hidden group-hover:flex items-center justify-center bg-gray-800 text-white text-sm px-4 py-1 rounded-md -bottom-10 left-1/2 transform -translate-x-1/2 w-max">
+                        {user.displayName}
+                    </span>
+                </div>
+                <button
+                    onClick={logOut}
+                    className="lg:flex btn btn-outline text-gray-700 dark:text-white"
+                >
+                    Logout
+                </button>
+            </div>
+        ) : (
+            <div className="flex flex-col lg:flex-row gap-3">
+                <NavLink
+                    to="/login"
+                    className={({ isActive }) =>
+                        isActive
+                            ? "btn btn-primary text-white"
+                            : "btn btn-outline text-gray-700 dark:text-white"
+                    }
+                >
+                    Login
+                </NavLink>
+                <NavLink
+                    to="/register"
+                    className={({ isActive }) =>
+                        isActive
+                            ? "btn btn-primary text-white"
+                            : "btn btn-outline text-gray-700 dark:text-white"
+                    }
+                >
+                    Register
+                </NavLink>
+            </div>
+        )}
     </>
 
     return (
-        <div className='shadow-md sticky top-0 z-50 transition-colors duration-300 bg-white text-black'>
+        <div className='shadow-md sticky top-0 z-50 transition-colors duration-300 bg-white bg-opacity-30 text-black'>
             <div className="flex justify-between w-11/12 mx-auto items-center py-3 flex-wrap">
                 {/* Logo */}
                 <div>
