@@ -29,6 +29,14 @@ const Navbar = () => {
                 Add Articles
             </NavLink>
             <NavLink
+                to="/allArticles"
+                className={({ isActive }) =>
+                    isActive ? "text-blue-500 font-bold border-0 border-b-blue-500 lg:border-b-4" : ""
+                }
+            >
+                All Articles
+            </NavLink>
+            <NavLink
                 to="/subscription"
                 className={({ isActive }) =>
                     isActive ? "text-blue-500 font-bold border-0 border-b-blue-500 lg:border-b-4" : ""

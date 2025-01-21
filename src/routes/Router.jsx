@@ -1,5 +1,6 @@
 import {
     createBrowserRouter,
+    Navigate,
   } from "react-router-dom";
 import Main from "../layout/Main";
 import Home from "../pages/Home/Home";
@@ -13,6 +14,8 @@ import Register from "../pages/Register/Register";
 import AllUsers from "../pages/Dashboard/InDashboard/AllUsers";
 import AddPublisher from "../pages/Dashboard/InDashboard/AddPublisher";
 import AllArticles from "../pages/Dashboard/InDashboard/AllArticles";
+import AdminRoute from "./AdminRoute";
+import AdminHome from "../pages/Dashboard/InDashboard/AdminHome";
 
   export const router = createBrowserRouter([
     {
@@ -39,6 +42,15 @@ import AllArticles from "../pages/Dashboard/InDashboard/AllArticles";
             path: 'dashboard',
             element: <Dashboard></Dashboard>,
             children: [
+                {
+                    // Default route when visiting /dashboard
+                    index: true,
+                    element: <Navigate to="/dashboard/adminHome" replace={true} />
+                },
+                {
+                    path: '/dashboard/adminHome',
+                    element: <AdminHome></AdminHome>,
+                },
                 {
                     path: '/dashboard/allUsers',
                     element: <AllUsers></AllUsers>,

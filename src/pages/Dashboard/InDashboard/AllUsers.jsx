@@ -1,13 +1,14 @@
 import { useQuery } from "@tanstack/react-query";
-import { FaTrashAlt, FaUsers } from "react-icons/fa";
+import { FaTrashAlt } from "react-icons/fa";
 import Swal from "sweetalert2";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import SectionTitle from "../../../component/SectionTitle/SectionTitle";
+import { FaUser } from "react-icons/fa6";
 
 
 const AllUsers = () => {
     const axiosSecure = useAxiosSecure();
-    const { data: users = [], refetch } = useQuery({
+    const { data: users = [], refetch, isLoading } = useQuery({
         queryKey: ['users'],
         queryFn: async () => {
             const res = await axiosSecure.get('/users');
@@ -15,21 +16,21 @@ const AllUsers = () => {
         }
     })
 
-    const handleMakeAdmin = user =>{
+    const handleMakeAdmin = user => {
         axiosSecure.patch(`/users/admin/${user._id}`)
-        .then(res =>{
-            // console.log(res.data)
-            if(res.data.modifiedCount > 0){
-                refetch();
-                Swal.fire({
-                    position: "top-end",
-                    icon: "success",
-                    title: `${user.name} is an Admin Now!`,
-                    showConfirmButton: false,
-                    timer: 1500
-                  });
-            }
-        })
+            .then(res => {
+                // console.log(res.data)
+                if (res.data.modifiedCount > 0) {
+                    refetch();
+                    Swal.fire({
+                        position: "top-end",
+                        icon: "success",
+                        title: `${user.name} is an Admin Now!`,
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                }
+            })
     }
 
     const handleDeleteUser = user => {
@@ -60,37 +61,46 @@ const AllUsers = () => {
     }
 
     return (
-        <div>
+        <div className="min-h-screen">
             <div className="mb-3">
-                <SectionTitle heading="All Users" subHeading={`We have ${users.length} happy registered users`}></SectionTitle>
+                <SectionTitle heading="All Users"></SectionTitle>
+                {isLoading && <div className="flex justify-center items-center"><span className="loading loading-bars loading-lg"></span></div>}
                 <h2 className="text-xl">Total Users: {users.length}</h2>
             </div>
             <div className="overflow-x-auto">
-                <table className="table table-zebra w-full text-center">
+                <table className="table-auto table-zebra w-full text-center">
                     {/* head */}
                     <thead>
                         <tr>
-                            <th>#</th>
-                            <th>Name</th>
-                            <th>Email</th>
-                            <th>Role</th>
-                            <th>Action</th>
+                            <th className="px-4 py-2">#</th>
+                            <th className="px-4 py-2">Photo</th>
+                            <th className="px-4 py-2">Name</th>
+                            <th className="px-4 py-2">Email</th>
+                            <th className="px-4 py-2">Role</th>
+                            <th className="px-4 py-2">Action</th>
                         </tr>
                     </thead>
                     <tbody>
                         {
                             users.map((user, index) => <tr key={user._id}>
-                                <th>{index + 1}</th>
-                                <td>{user.name}</td>
-                                <td>{user.email}</td>
-                                <td>
-                                    { user.role === 'admin' ? 'Admin' : <button
+                                <th className="px-4 py-2">{index + 1}</th>
+                                <th className="px-4 py-2"><div className="avatar">
+                                    <div className="mask mask-squircle h-12 w-12">
+                                        <img
+                                            src={user.photo}
+                                            alt="Avatar Tailwind CSS Component" />
+                                    </div>
+                                </div></th>
+                                <td className="px-4 py-2">{user.name}</td>
+                                <td className="px-4 py-2">{user.email}</td>
+                                <td className="px-4 py-2">
+                                    {user.role === 'admin' ? 'Admin' : <button
                                         onClick={() => handleMakeAdmin(user)}
-                                        className="btn btn-lg bg-white border-none shadow-none">
-                                        <FaUsers className=""></FaUsers>
+                                        className="btn btn-lg bg-opacity-0 border-none shadow-none">
+                                        <FaUser className=""></FaUser>
                                     </button>}
                                 </td>
-                                <td>
+                                <td className="px-4 py-2">
                                     <button
                                         onClick={() => handleDeleteUser(user)}
                                         className="btn btn-ghost btn-lg">
