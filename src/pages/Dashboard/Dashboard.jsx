@@ -46,8 +46,8 @@ const Dashboard = () => {
                         </NavLink>
                     </li>
                     <li>
-                        <NavLink to="/dashboard/allArticles" onClick={toggleDrawer}>
-                            <FaBook /> All Articles
+                        <NavLink to="/dashboard/manageArticles" onClick={toggleDrawer}>
+                            <FaBook /> Manage Articles
                         </NavLink>
                     </li>
                     <li>

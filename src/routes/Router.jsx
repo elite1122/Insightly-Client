@@ -5,17 +5,18 @@ import {
 import Main from "../layout/Main";
 import Home from "../pages/Home/Home";
 import AddArticles from "../pages/AddArticles/AddArticles";
+import AllArticles from "../pages/AllArticles/AllArticles";
 import Subscription from "../pages/Subscription/Subscription";
 import Dashboard from "../pages/Dashboard/Dashboard";
 import MyArticles from "../pages/MyArticles/MyArticles";
 import PremiumArticles from "../pages/PremiumArticles/PremiumArticles";
 import Login from "../pages/Login/Login";
 import Register from "../pages/Register/Register";
-import AllUsers from "../pages/Dashboard/InDashboard/AllUsers";
 import AddPublisher from "../pages/Dashboard/InDashboard/AddPublisher";
-import AllArticles from "../pages/Dashboard/InDashboard/AllArticles";
-import AdminRoute from "./AdminRoute";
 import AdminHome from "../pages/Dashboard/InDashboard/AdminHome";
+import ManageArticles from "../pages/Dashboard/InDashboard/ManageArticles";
+import AllUsers from "../pages/Dashboard/InDashboard/AllUsers";
+
 
   export const router = createBrowserRouter([
     {
@@ -56,8 +57,8 @@ import AdminHome from "../pages/Dashboard/InDashboard/AdminHome";
                     element: <AllUsers></AllUsers>,
                 },
                 {
-                    path: '/dashboard/allArticles',
-                    element: <AllArticles></AllArticles>,
+                    path: '/dashboard/manageArticles',
+                    element: <ManageArticles></ManageArticles>,
                 },
                 {
                     path: '/dashboard/addPublisher',

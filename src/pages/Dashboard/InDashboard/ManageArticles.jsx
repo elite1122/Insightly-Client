@@ -4,7 +4,7 @@ import Swal from "sweetalert2";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import { useState } from "react";
 
-const AllArticles = () => {
+const ManageArticles = () => {
     const axiosSecure = useAxiosSecure();
     const { data: articles = [], refetch } = useQuery(["articles"], async () => {
         const res = await axiosSecure.get("/articles");
@@ -97,4 +97,4 @@ const AllArticles = () => {
     );
 };
 
-export default AllArticles;
+export default ManageArticles;
