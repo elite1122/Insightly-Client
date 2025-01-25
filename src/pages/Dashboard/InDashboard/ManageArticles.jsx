@@ -1,15 +1,21 @@
+
 import { useQuery } from "@tanstack/react-query";
-import { FaCheck, FaTimes, FaTrash, FaStar } from "react-icons/fa";
+import { FaCheck, FaTimes, FaStar, FaTrashAlt } from "react-icons/fa";
 import Swal from "sweetalert2";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import { useState } from "react";
+import SectionTitle from "../../../component/SectionTitle/SectionTitle";
 
 const ManageArticles = () => {
     const axiosSecure = useAxiosSecure();
-    const { data: articles = [], refetch } = useQuery(["articles"], async () => {
-        const res = await axiosSecure.get("/articles");
-        return res.data;
+    const { data: articles = [], refetch, isLoading } = useQuery({
+        queryKey: ["articles"],
+        queryFn: async () => {
+            const res = await axiosSecure.get("/articles");
+            return res.data;
+        }
     });
+
 
     const [declineReason, setDeclineReason] = useState("");
 
@@ -25,17 +31,21 @@ const ManageArticles = () => {
             input: "textarea",
             inputPlaceholder: "Enter reason here...",
             showCancelButton: true,
-            preConfirm: (reason) => {
-                setDeclineReason(reason);
+            preConfirm: async (reason) => {
+                if (!reason) {
+                    Swal.showValidationMessage("Reason is required!");
+                    return false;
+                }
+                return reason;
             },
         }).then(async (result) => {
-            if (result.isConfirmed && declineReason) {
-                await axiosSecure.patch(`/articles/decline/${id}`, { reason: declineReason });
+            if (result.isConfirmed) {
+                await axiosSecure.patch(`/articles/decline/${id}`, { reason: result.value });
                 Swal.fire("Declined", "Article declined successfully", "error");
                 refetch();
             }
         });
-    };
+    };    
 
     const handleDelete = async (id) => {
         Swal.fire({
@@ -62,37 +72,46 @@ const ManageArticles = () => {
     };
 
     return (
-        <div>
-            <h2 className="text-3xl">All Articles</h2>
-            <table className="table table-striped">
-                <thead>
-                    <tr>
-                        <th>Title</th>
-                        <th>Author</th>
-                        <th>Email</th>
-                        <th>Posted Date</th>
-                        <th>Status</th>
-                        <th>Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {articles.map((article) => (
-                        <tr key={article._id}>
-                            <td>{article.title}</td>
-                            <td>{article.authorName}</td>
-                            <td>{article.authorEmail}</td>
-                            <td>{new Date(article.date).toLocaleDateString()}</td>
-                            <td>{article.status}</td>
-                            <td>
-                                <button onClick={() => handleApprove(article._id)} className="btn btn-success"><FaCheck /></button>
-                                <button onClick={() => handleDecline(article._id)} className="btn btn-warning mx-2"><FaTimes /></button>
-                                <button onClick={() => handleDelete(article._id)} className="btn btn-danger mx-2"><FaTrash /></button>
-                                <button onClick={() => handleMakePremium(article._id)} className="btn btn-primary mx-2"><FaStar /></button>
-                            </td>
+        <div className="min-h-screen">
+            <div className="mb-3">
+                <SectionTitle heading="All Articles"></SectionTitle>
+                {isLoading && <div className="flex justify-center items-center"><span className="loading loading-bars loading-lg"></span></div>}
+            </div>
+            <div className="overflow-x-auto">
+                <table className="table-auto table-striped w-full text-center">
+                    <thead>
+                        <tr>
+                            <th className="px-4 py-2">#</th>
+                            <th className="px-4 py-2">Title</th>
+                            <th className="px-4 py-2">Author</th>
+                            <th className="px-4 py-2">Email</th>
+                            <th className="px-4 py-2">Posted Date</th>
+                            <th className="px-4 py-2">Status</th>
+                            <th className="px-4 py-2">Actions</th>
                         </tr>
-                    ))}
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                        {articles.map((article, index) => (
+                            <tr key={article._id}>
+                                <th className="px-4 py-2">{index + 1}</th>
+                                <td className="px-4 py-2">{article.title}</td>
+                                <td className="px-4 py-2">{article.authorName}</td>
+                                <td className="px-4 py-2">{article.authorEmail}</td>
+                                <td className="px-4 py-2">{new Date(article.postDate).toLocaleDateString()}</td>
+                                <td className="px-4 py-2">{article.isApproved ? "Approved" : "Pending"}</td>
+                                <td className="px-4 py-2">
+                                    <div className="flex flex-col lg:flex-row space-y-2 lg:space-y-0 gap-2 lg:justify-center">
+                                        <button onClick={() => handleApprove(article._id)} className="btn btn-success"><FaCheck /></button>
+                                        <button onClick={() => handleDecline(article._id)} className="btn btn-warning"><FaTimes /></button>
+                                        <button onClick={() => handleDelete(article._id)} className="btn btn-danger text-red-600"><FaTrashAlt /></button>
+                                        <button onClick={() => handleMakePremium(article._id)} className="btn btn-primary"><FaStar /></button>
+                                    </div>
+                                </td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
+            </div>
         </div>
     );
 };

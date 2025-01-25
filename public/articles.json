@@ -1,102 +1,114 @@
 [
-    {
-      "title": "The Future of AI in Healthcare",
-      "image": "https://i.ibb.co.com/7SmT7SZ/istockphoto-1530778805-612x612.jpg",
-      "publisher": "Tech Today",
-      "description": "Exploring how AI is transforming the healthcare industry with cutting-edge solutions.",
-      "tags": ["AI", "Healthcare", "Technology"],
-      "isPremium": true,
-      "isApproved": true
-    },
-    {
-      "title": "Blockchain Revolution in Finance",
-      "image": "https://i.ibb.co.com/9bKpzR8/cryptocurrency-6601591-960-720.webp",
-      "publisher": "Finance World",
-      "description": "A deep dive into how blockchain is reshaping the financial sector with decentralized solutions.",
-      "tags": ["Blockchain", "Finance", "Crypto"],
-      "isPremium": false,
-      "isApproved": true
-    },
-    {
-      "title": "Sustainable Energy Solutions for 2025",
-      "image": "https://i.ibb.co.com/bFYT9C2/ai-generated-9025441-640.webp",
-      "publisher": "Green Planet",
-      "description": "Analyzing new technologies driving the push for renewable and sustainable energy.",
-      "tags": ["Energy", "Sustainability", "Environment"],
-      "isPremium": true,
-      "isApproved": true
-    },
-    {
-      "title": "Top 10 Travel Destinations in 2025",
-      "image": "https://i.ibb.co.com/WGVX94F/top-95717-1280.webp",
-      "publisher": "Traveler's Digest",
-      "description": "Discover the best travel spots you must visit in the coming year.",
-      "tags": ["Travel", "Adventure", "Tourism"],
-      "isPremium": false,
-      "isApproved": true
-    },
-    {
-      "title": "Cybersecurity Trends to Watch",
-      "image": "https://i.ibb.co.com/BjkSrS1/ai-generated-8366100-960-720.jpg",
-      "publisher": "Cyber Secure",
-      "description": "An overview of the latest threats and defense mechanisms in cybersecurity.",
-      "tags": ["Cybersecurity", "Technology", "Privacy"],
-      "isPremium": true,
-      "isApproved": true
-    },
-    {
-      "title": "Renewable Energy Breakthroughs",
-      "image": "https://i.ibb.co.com/TvmDMQ2/solar-panels-8593759-640.webp",
-      "publisher": "Green Planet",
-      "description": "New advancements in solar and wind energy are shaping a greener future.",
-      "tags": ["Energy", "Innovation", "Renewables"],
-      "isPremium": false,
-      "isApproved": true
-    },
-    {
-      "title": "Climate Change and Its Global Impact",
-      "image": "https://i.ibb.co.com/PCmbCY3/climate-change-2254711-640.jpg",
-      "publisher": "Green Planet",
-      "description": "A detailed analysis of climate change and how it affects economies and ecosystems.",
-      "tags": ["Climate Change", "Environment", "Policy"],
-      "isPremium": true,
-      "isApproved": true
-    },
-    {
-      "title": "Smart Cities of the Future",
-      "image": "https://i.ibb.co.com/mSpNvc6/ai-generated-8262928-640.jpg",
-      "publisher": "Tech Today",
-      "description": "How AI and IoT are shaping the cities of tomorrow with smart infrastructure.",
-      "tags": ["Smart Cities", "AI", "Technology"],
-      "isPremium": true,
-      "isApproved": true
-    },
-    {
-      "title": "Investment Strategies for 2025",
-      "image": "https://i.ibb.co.com/5vws6nF/finance-8040361-640.webp",
-      "publisher": "Finance World",
-      "description": "Key investment trends and strategies to watch for in the upcoming year.",
-      "tags": ["Finance", "Investment", "Economy"],
-      "isPremium": false,
-      "isApproved": true
-    },
-    {
-      "title": "The Future of Electric Mobility",
-      "image": "https://i.ibb.co.com/X7SZgsj/car-6943451-640.webp",
-      "publisher": "Green Planet",
-      "description": "Examining the growth and challenges of electric mobility across the globe.",
-      "tags": ["Electric Vehicles", "Sustainability", "Innovation"],
-      "isPremium": true,
-      "isApproved": true
-    },
-    {
-      "title": "AI in Everyday Life",
-      "image": "https://i.ibb.co.com/8Yf60t2/ai-generated-8531013-640.webp",
-      "publisher": "Tech Today",
-      "description": "From smart assistants to automation, how AI is becoming a part of our daily routines.",
-      "tags": ["AI", "Automation", "Technology"],
-      "isPremium": false,
-      "isApproved": true
-    }
-  ]
-  
+  {
+    "title": "The Future of AI in Healthcare",
+    "image": "https://i.ibb.co.com/7SmT7SZ/istockphoto-1530778805-612x612.jpg",
+    "publisher": "Tech Today",
+    "description": "Exploring how AI is transforming the healthcare industry with cutting-edge solutions.",
+    "tags": ["AI", "Healthcare", "Technology"],
+    "isPremium": true,
+    "isApproved": true,
+    "authorName": "test",
+    "authorEmail": "test@gmail.com",
+    "authorPhoto": "https://i.ibb.co.com/zmGN20L/1652934627991.jpg",
+    "postDate": "2025-01-23T05:16:40.890Z",
+    "views": 0
+  },
+  {
+    "title": "Blockchain Revolution in Finance",
+    "image": "https://i.ibb.co.com/9bKpzR8/cryptocurrency-6601591-960-720.webp",
+    "publisher": "Finance World",
+    "description": "A deep dive into how blockchain is reshaping the financial sector with decentralized solutions.",
+    "tags": ["Blockchain", "Finance", "Crypto"],
+    "isPremium": false,
+    "isApproved": true,
+    "authorName": "test",
+    "authorEmail": "test@gmail.com",
+    "authorPhoto": "https://i.ibb.co.com/zmGN20L/1652934627991.jpg",
+    "postDate": "2025-01-23T05:16:40.890Z",
+    "views": 0
+  },
+  {
+    "title": "Sustainable Energy Solutions for 2025",
+    "image": "https://i.ibb.co.com/bFYT9C2/ai-generated-9025441-640.webp",
+    "publisher": "Green Planet",
+    "description": "Analyzing new technologies driving the push for renewable and sustainable energy.",
+    "tags": ["Energy", "Sustainability", "Environment"],
+    "isPremium": true,
+    "isApproved": true,
+    "authorName": "test",
+    "authorEmail": "test@gmail.com",
+    "authorPhoto": "https://i.ibb.co.com/zmGN20L/1652934627991.jpg",
+    "postDate": "2025-01-23T05:16:40.890Z",
+    "views": 0
+  },
+  {
+    "title": "Top 10 Travel Destinations in 2025",
+    "image": "https://i.ibb.co.com/WGVX94F/top-95717-1280.webp",
+    "publisher": "Traveler's Digest",
+    "description": "Discover the best travel spots you must visit in the coming year.",
+    "tags": ["Travel", "Adventure", "Tourism"],
+    "isPremium": false,
+    "isApproved": true,
+    "authorName": "test",
+    "authorEmail": "test@gmail.com",
+    "authorPhoto": "https://i.ibb.co.com/zmGN20L/1652934627991.jpg",
+    "postDate": "2025-01-23T05:16:40.890Z",
+    "views": 0
+  },
+  {
+    "title": "Cybersecurity Trends to Watch",
+    "image": "https://i.ibb.co.com/BjkSrS1/ai-generated-8366100-960-720.jpg",
+    "publisher": "Cyber Secure",
+    "description": "An overview of the latest threats and defense mechanisms in cybersecurity.",
+    "tags": ["Cybersecurity", "Technology", "Privacy"],
+    "isPremium": true,
+    "isApproved": true,
+    "authorName": "test",
+    "authorEmail": "test@gmail.com",
+    "authorPhoto": "https://i.ibb.co.com/zmGN20L/1652934627991.jpg",
+    "postDate": "2025-01-23T05:16:40.890Z",
+    "views": 0
+  },
+  {
+    "title": "Investment Strategies for 2025",
+    "image": "https://i.ibb.co.com/5vws6nF/finance-8040361-640.webp",
+    "publisher": "Finance World",
+    "description": "Key investment trends and strategies to watch for in the upcoming year.",
+    "tags": ["Finance", "Investment", "Economy"],
+    "isPremium": false,
+    "isApproved": true,
+    "authorName": "test",
+    "authorEmail": "test@gmail.com",
+    "authorPhoto": "https://i.ibb.co.com/zmGN20L/1652934627991.jpg",
+    "postDate": "2025-01-23T05:16:40.890Z",
+    "views": 0
+  },
+  {
+    "title": "The Future of Electric Mobility",
+    "image": "https://i.ibb.co.com/X7SZgsj/car-6943451-640.webp",
+    "publisher": "Green Planet",
+    "description": "Examining the growth and challenges of electric mobility across the globe.",
+    "tags": ["Electric Vehicles", "Sustainability", "Innovation"],
+    "isPremium": true,
+    "isApproved": true,
+    "authorName": "test",
+    "authorEmail": "test@gmail.com",
+    "authorPhoto": "https://i.ibb.co.com/zmGN20L/1652934627991.jpg",
+    "postDate": "2025-01-23T05:16:40.890Z",
+    "views": 0
+  },
+  {
+    "title": "AI in Everyday Life",
+    "image": "https://i.ibb.co.com/8Yf60t2/ai-generated-8531013-640.webp",
+    "publisher": "Tech Today",
+    "description": "From smart assistants to automation, how AI is becoming a part of our daily routines.",
+    "tags": ["AI", "Automation", "Technology"],
+    "isPremium": false,
+    "isApproved": true,
+    "authorName": "test",
+    "authorEmail": "test@gmail.com",
+    "authorPhoto": "https://i.ibb.co.com/zmGN20L/1652934627991.jpg",
+    "postDate": "2025-01-23T05:16:40.890Z",
+    "views": 0
+  }
+]

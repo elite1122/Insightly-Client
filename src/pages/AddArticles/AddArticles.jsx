@@ -1,15 +1,19 @@
 import { useForm } from "react-hook-form";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Select from "react-select";
 import axios from "axios";
 import Swal from "sweetalert2";
 import SectionTitle from "../../component/SectionTitle/SectionTitle";
+import useAuth from "../../hooks/useAuth";
+import useAxiosPublic from "../../hooks/useAxiosPublic";
+import { useQuery } from "@tanstack/react-query";
 
 const AddArticle = () => {
+    const { user } = useAuth();
     const { register, handleSubmit, reset } = useForm();
-    const [publishers, setPublishers] = useState([]);
     const [selectedTags, setSelectedTags] = useState([]);
     const imgbbApiKey = import.meta.env.VITE_IMGBB_API_KEY;
+    const axiosPublic = useAxiosPublic();
 
     const tagOptions = [
         { value: "AI", label: "AI" },
@@ -37,12 +41,14 @@ const AddArticle = () => {
         { value: "Automation", label: "Automation" },
     ];
 
-
-    useEffect(() => {
-        axios.get("http://localhost:5000/publishers")
-            .then(res => setPublishers(res.data))
-            .catch(err => console.error(err));
-    }, []);
+    // Fetch publishers using TanStack Query
+    const { data: publishers = [], isLoading, error } = useQuery({
+        queryKey: ["publishers"],
+        queryFn: async () => {
+            const res = await axiosPublic.get("/publishers");
+            return res.data;
+        },
+    });
 
     const onSubmit = async (data) => {
         const formData = new FormData();
@@ -55,15 +61,21 @@ const AddArticle = () => {
                     title: data.title,
                     image: imgRes.data.data.url,
                     publisher: data.publisher,
-                    tags: selectedTags.map(tag => tag.value),
                     description: data.description,
+                    tags: selectedTags.map(tag => tag.value),
                     isPremium: false,
-                    isApproved: false
+                    isApproved: false,
+                    authorName: user.displayName,
+                    authorEmail: user.email,
+                    authorPhoto: user.photoURL,
+                    postDate: new Date(),
+                    views: 0
                 };
 
-                await axios.post("http://localhost:5000/articles", newArticle);
+                await axiosPublic.post("/articles", newArticle);
                 Swal.fire("Success!", "Article submitted for approval.", "success");
                 reset();
+                setSelectedTags([]);
             }
         } catch (error) {
             console.error(error);
@@ -86,18 +98,25 @@ const AddArticle = () => {
                     </div>
                     <div className="form-control">
                         <label className="label">Publisher</label>
-                        <select {...register("publisher", { required: true })} className="select select-bordered w-full">
-                            <option value="">Select Publisher</option>
-                            {publishers.map(publisher => (
-                                <option key={publisher._id} value={publisher.name}>{publisher.name}</option>
-                            ))}
-                        </select>
+                        {isLoading ? (
+                            <p>Loading publishers...</p>
+                        ) : error ? (
+                            <p className="text-red-500">Failed to load publishers.</p>
+                        ) : (
+                            <select {...register("publisher", { required: true })} className="select select-bordered w-full">
+                                <option value="">Select Publisher</option>
+                                {publishers.map(publisher => (
+                                    <option key={publisher._id} value={publisher.name}>{publisher.name}</option>
+                                ))}
+                            </select>
+                        )}
                     </div>
                     <div className="form-control">
                         <label className="label">Tags</label>
                         <Select
                             isMulti
                             options={tagOptions}
+                            value={selectedTags}
                             onChange={setSelectedTags}
                             className="w-full"
                         />
