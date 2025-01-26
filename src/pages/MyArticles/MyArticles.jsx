@@ -20,6 +20,15 @@ const MyArticles = () => {
         enabled: !!user?.email,
     });
 
+    const handleShowReason = (reason) => {
+        Swal.fire({
+            title: "Decline Reason",
+            text: reason || "No reason provided",
+            icon: "info",
+            confirmButtonText: "OK",
+        });
+    };
+
     const deleteArticle = useMutation({
         mutationFn: async (id) => {
             const res = await axiosPublic.delete(`/articles/${id}`);
@@ -33,7 +42,7 @@ const MyArticles = () => {
             Swal.fire("Error!", "Failed to delete the article.", "error");
         },
     });
-    
+
 
     const handleDelete = async (id) => {
         const result = await Swal.fire({
@@ -45,11 +54,11 @@ const MyArticles = () => {
             cancelButtonColor: "#3085d6",
             confirmButtonText: "Yes, delete it!",
         });
-    
+
         if (result.isConfirmed) {
             deleteArticle.mutate(id);
         }
-    };    
+    };
 
     if (isLoading) {
         return (
@@ -82,7 +91,15 @@ const MyArticles = () => {
                                     {article.isApproved
                                         ? "Approved"
                                         : article.isDeclined
-                                        ? "Declined"
+                                            ? <div className="flex flex-col items-center">
+                                                Declined
+                                                <button
+                                                className="text-blue-500"
+                                                onClick={() => handleShowReason(article.declineReason)}
+                                            >
+                                                Reason
+                                            </button>
+                                            </div>
                                         : "Pending"}
                                 </td>
                                 <td className="border p-4">{article.isPremium ? "Yes" : "No"}</td>
