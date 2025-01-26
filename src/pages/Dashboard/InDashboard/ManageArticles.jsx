@@ -3,7 +3,6 @@ import { useQuery } from "@tanstack/react-query";
 import { FaCheck, FaTimes, FaStar, FaTrashAlt } from "react-icons/fa";
 import Swal from "sweetalert2";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
-import { useState } from "react";
 import SectionTitle from "../../../component/SectionTitle/SectionTitle";
 
 const ManageArticles = () => {
@@ -15,9 +14,6 @@ const ManageArticles = () => {
             return res.data;
         }
     });
-
-
-    const [declineReason, setDeclineReason] = useState("");
 
     const handleApprove = async (id) => {
         await axiosSecure.patch(`/articles/approve/${id}`);
@@ -74,7 +70,7 @@ const ManageArticles = () => {
     return (
         <div className="min-h-screen">
             <div className="mb-3">
-                <SectionTitle heading="All Articles"></SectionTitle>
+                <SectionTitle heading="Manage Articles"></SectionTitle>
                 {isLoading && <div className="flex justify-center items-center"><span className="loading loading-bars loading-lg"></span></div>}
             </div>
             <div className="overflow-x-auto">

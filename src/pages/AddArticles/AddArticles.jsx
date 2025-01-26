@@ -86,7 +86,7 @@ const AddArticle = () => {
     return (
         <div className="min-h-screen flex justify-center items-center">
             <div className="card w-full md:max-w-xl shadow-2xl p-10">
-                <SectionTitle heading="Add New Article"></SectionTitle>
+                <SectionTitle heading="Add New Article" subHeading="Please fill up the form to add a new article"></SectionTitle>
                 <form onSubmit={handleSubmit(onSubmit)} className="card-body">
                     <div className="form-control">
                         <label className="label">Title</label>
