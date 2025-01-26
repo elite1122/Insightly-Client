@@ -94,7 +94,13 @@ const ManageArticles = () => {
                                 <td className="px-4 py-2">{article.authorName}</td>
                                 <td className="px-4 py-2">{article.authorEmail}</td>
                                 <td className="px-4 py-2">{new Date(article.postDate).toLocaleDateString()}</td>
-                                <td className="px-4 py-2">{article.isApproved ? "Approved" : "Pending"}</td>
+                                <td className="px-4 py-2">
+                                    {article.isApproved
+                                        ? "Approved"
+                                        : article.isDeclined
+                                            ? "Declined"
+                                            : "Pending"}
+                                </td>
                                 <td className="px-4 py-2">
                                     <div className="flex flex-col lg:flex-row space-y-2 lg:space-y-0 gap-2 lg:justify-center">
                                         <button onClick={() => handleApprove(article._id)} className="btn btn-success"><FaCheck /></button>

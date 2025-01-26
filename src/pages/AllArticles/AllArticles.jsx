@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
+import Select from "react-select";
 import useAxiosPublic from "../../hooks/useAxiosPublic";
 import SectionTitle from "../../component/SectionTitle/SectionTitle";
 
@@ -9,14 +10,16 @@ const AllArticles = () => {
     const navigate = useNavigate();
     const [searchQuery, setSearchQuery] = useState("");
     const [selectedPublisher, setSelectedPublisher] = useState("");
+    const [selectedTags, setSelectedTags] = useState([]);
 
     // Fetch articles using useQuery
-    const { data: articles = [], isLoading: articlesLoading, refetch } = useQuery({
-        queryKey: ["articles", searchQuery, selectedPublisher],
+    const { data: articles = [], isLoading: articlesLoading } = useQuery({
+        queryKey: ["articles", searchQuery, selectedPublisher, selectedTags],
         queryFn: async () => {
             const queryParams = new URLSearchParams({
                 search: searchQuery,
                 publisher: selectedPublisher,
+                tags: selectedTags.map((tag) => tag.value).join(","),
                 status: "approved", // Only approved articles
             });
             const res = await axiosPublic.get(`/articles?${queryParams}`);
@@ -33,25 +36,32 @@ const AllArticles = () => {
         },
     });
 
+    const tagOptions = [
+        "AI", "Healthcare", "Technology", "Blockchain", "Finance", "Crypto", "Energy",
+        "Sustainability", "Environment", "Travel", "Adventure", "Tourism", "Cybersecurity",
+        "Privacy", "Innovation", "Renewables", "Climate Change", "Policy", "Smart Cities",
+        "Investment", "Economy", "Electric Vehicles", "Automation"
+    ].map(tag => ({ value: tag, label: tag }));
+
     return (
         <div className="min-h-screen p-6">
             <SectionTitle heading="All Articles" subHeading="See all the articles here" />
-            <div className="flex gap-4 mb-6">
+            <div className="flex gap-4 mb-6 justify-between flex-col lg:flex-row">
                 <input
                     type="text"
                     placeholder="Search by title..."
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
-                    className="input input-bordered w-full"
+                    className="input input-bordered w-full md:w-1/3"
                 />
                 <select
-                    className="select select-bordered"
+                    className="select select-bordered w-full md:w-1/4"
                     value={selectedPublisher}
                     onChange={(e) => setSelectedPublisher(e.target.value)}
                 >
                     <option value="">All Publishers</option>
                     {publishersLoading ? (
-                        <option disabled><div className="flex justify-center items-center"><span className="loading loading-bars loading-lg"></span></div></option>
+                        <option disabled>Loading...</option>
                     ) : (
                         publishers.map((publisher) => (
                             <option key={publisher._id} value={publisher.name}>
@@ -60,13 +70,27 @@ const AllArticles = () => {
                         ))
                     )}
                 </select>
+                <Select
+                    className="w-full md:w-1/3"
+                    isMulti
+                    options={tagOptions}
+                    value={selectedTags}
+                    onChange={setSelectedTags}
+                    placeholder="Filter by tags"
+                />
             </div>
 
             {articlesLoading ? (
-                <div className="flex justify-center items-center"><span className="loading loading-bars loading-lg"></span></div>
+                <div className="flex justify-center items-center">
+                    <span className="loading loading-bars loading-lg"></span>
+                </div>
             ) : (
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    {articles.map((article) => (
+                    {articles
+                        .filter(article =>
+                            article.title.toLowerCase().includes(searchQuery.toLowerCase())
+                        )
+                        .map((article) => (
                         <div
                             key={article._id}
                             className={`border p-6 rounded-lg shadow-lg transition-all duration-300 flex flex-col justify-between h-full ${
