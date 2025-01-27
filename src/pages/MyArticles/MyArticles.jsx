@@ -44,7 +44,6 @@ const MyArticles = () => {
         },
     });
 
-
     const handleDelete = async (id) => {
         const result = await Swal.fire({
             title: "Are you sure?",
@@ -75,67 +74,81 @@ const MyArticles = () => {
                 <title>Insightly | My Articles</title>
             </Helmet>
             <div className="min-h-screen bg-gradient-to-r from-blue-300 via-purple-300 to-indigo-300 border-blue-500 transform shadow-lg rounded-lg p-6">
-            <SectionTitle heading="My Articles" subHeading="All your articles are here"></SectionTitle>
-            <div className="overflow-x-auto">
-                <table className="table-auto table-striped w-full text-center">
-                    <thead>
-                        <tr className="px-4 py-2">
-                            <th className="px-4 py-2">#</th>
-                            <th className="px-4 py-2">Title</th>
-                            <th className="px-4 py-2">Status</th>
-                            <th className="px-4 py-2">Premium</th>
-                            <th className="px-4 py-2">Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {articles.map((article, index) => (
-                            <tr key={article._id}>
-                                <td className="px-4 py-2">{index + 1}</td>
-                                <td className="px-4 py-2">{article.title}</td>
-                                <td className="px-4 py-2">
-                                    {article.isApproved
-                                        ? "Approved"
-                                        : article.isDeclined
-                                            ? <div className="flex flex-col items-center">
-                                                Declined
+                <SectionTitle heading="My Articles" subHeading="All your articles are here"></SectionTitle>
+                {articles.length === 0 ? (
+                    <div className="flex flex-col items-center justify-center mt-10">
+                        <h2 className="text-2xl text-gray-600">You have not created any articles yet!</h2>
+                        <button
+                            className="btn btn-primary mt-4"
+                            onClick={() => navigate("/addArticles")}
+                        >
+                            Create an Article
+                        </button>
+                    </div>
+                ) : (
+                    <div className="overflow-x-auto">
+                        <table className="table-auto table-striped w-full text-center">
+                            <thead>
+                                <tr className="px-4 py-2">
+                                    <th className="px-4 py-2">#</th>
+                                    <th className="px-4 py-2">Title</th>
+                                    <th className="px-4 py-2">Status</th>
+                                    <th className="px-4 py-2">Premium</th>
+                                    <th className="px-4 py-2">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {articles.map((article, index) => (
+                                    <tr key={article._id}>
+                                        <td className="px-4 py-2">{index + 1}</td>
+                                        <td className="px-4 py-2">{article.title}</td>
+                                        <td className="px-4 py-2">
+                                            {article.isApproved
+                                                ? "Approved"
+                                                : article.isDeclined ? (
+                                                    <div className="flex flex-col items-center">
+                                                        Declined
+                                                        <button
+                                                            className="text-blue-500"
+                                                            onClick={() => handleShowReason(article.declineReason)}
+                                                        >
+                                                            Reason
+                                                        </button>
+                                                    </div>
+                                                ) : (
+                                                    "Pending"
+                                                )}
+                                        </td>
+                                        <td className="px-4 py-2">{article.isPremium ? "Yes" : "No"}</td>
+                                        <td className="px-4 py-2">
+                                            <div className="flex flex-col lg:flex-row space-y-2 lg:space-y-0 justify-center">
                                                 <button
-                                                className="text-blue-500"
-                                                onClick={() => handleShowReason(article.declineReason)}
-                                            >
-                                                Reason
-                                            </button>
+                                                    className="btn btn-primary mr-2"
+                                                    onClick={() => navigate(`/articles/${article._id}`)}
+                                                >
+                                                    Details
+                                                </button>
+                                                <button
+                                                    className="btn btn-warning mr-2"
+                                                    onClick={() => navigate(`/updateArticles/${article._id}`)}
+                                                >
+                                                    Update
+                                                </button>
+                                                <button
+                                                    className="btn btn-error"
+                                                    onClick={() => handleDelete(article._id)}
+                                                >
+                                                    Delete
+                                                </button>
                                             </div>
-                                        : "Pending"}
-                                </td>
-                                <td className="px-4 py-2">{article.isPremium ? "Yes" : "No"}</td>
-                                <td className="px-4 py-2">
-                                    <div className="flex flex-col lg:flex-row space-y-2 lg:space-y-0 justify-center">
-                                        <button
-                                            className="btn btn-primary mr-2"
-                                            onClick={() => navigate(`/articles/${article._id}`)}
-                                        >
-                                            Details
-                                        </button>
-                                        <button
-                                            className="btn btn-warning mr-2"
-                                            onClick={() => navigate(`/updateArticles/${article._id}`)}
-                                        >
-                                            Update
-                                        </button>
-                                        <button
-                                            className="btn btn-error"
-                                            onClick={() => handleDelete(article._id)}
-                                        >
-                                            Delete
-                                        </button>
-                                    </div>
-                                </td>
-                            </tr>
-                        ))}
-                    </tbody>
-                </table>
+                                        </td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
+                    </div>
+                )}
             </div>
-        </div>
         </section>
     );
 };
