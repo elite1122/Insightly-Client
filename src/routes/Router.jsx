@@ -19,12 +19,14 @@ import AllUsers from "../pages/Dashboard/InDashboard/AllUsers";
 import UpdateArticles from "../pages/UpdateArticles/UpdateArticles";
 import ArticleDetails from "../component/ArticleDetails/ArticleDetails";
 import Profile from "../pages/Profile/Profile";
+import ErrorPage from "../component/ErrorPage/ErrorPage";
 
 
   export const router = createBrowserRouter([
     {
       path: "/",
       element: <Main></Main>,
+      errorElement: <ErrorPage></ErrorPage>,
       children: [
         {
             path: '/',
