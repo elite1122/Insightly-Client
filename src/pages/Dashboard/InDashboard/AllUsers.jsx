@@ -1,40 +1,49 @@
 import { useQuery } from "@tanstack/react-query";
-import { FaTrashAlt } from "react-icons/fa";
+import { FaTrashAlt, FaUser } from "react-icons/fa";
 import Swal from "sweetalert2";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import SectionTitle from "../../../component/SectionTitle/SectionTitle";
-import { FaUser } from "react-icons/fa6";
 import { Helmet } from "react-helmet-async";
-
+import { useState } from "react";
+import ReactPaginate from "react-paginate";
 
 const AllUsers = () => {
     const axiosSecure = useAxiosSecure();
     const { data: users = [], refetch, isLoading } = useQuery({
-        queryKey: ['users'],
+        queryKey: ["users"],
         queryFn: async () => {
-            const res = await axiosSecure.get('/users');
+            const res = await axiosSecure.get("/users");
             return res.data;
-        }
-    })
+        },
+    });
 
-    const handleMakeAdmin = user => {
-        axiosSecure.patch(`/users/admin/${user._id}`)
-            .then(res => {
-                // console.log(res.data)
-                if (res.data.modifiedCount > 0) {
-                    refetch();
-                    Swal.fire({
-                        position: "top-end",
-                        icon: "success",
-                        title: `${user.name} is an Admin Now!`,
-                        showConfirmButton: false,
-                        timer: 1500
-                    });
-                }
-            })
-    }
+    const [currentPage, setCurrentPage] = useState(0);
+    const usersPerPage = 5;
 
-    const handleDeleteUser = user => {
+    const handlePageClick = (event) => {
+        setCurrentPage(event.selected);
+    };
+
+    const offset = currentPage * usersPerPage;
+    const currentUsers = users.slice(offset, offset + usersPerPage);
+    const pageCount = Math.ceil(users.length / usersPerPage);
+
+    const handleMakeAdmin = (user) => {
+        axiosSecure.patch(`/users/admin/${user._id}`).then((res) => {
+            if (res.data.modifiedCount > 0) {
+                refetch();
+                Swal.fire({
+                    position: "top-end",
+                    icon: "success",
+                    title: `${user.name} is an Admin Now!`,
+                    showConfirmButton: false,
+                    timer: 1500,
+                });
+            }
+        });
+    };
+
+    const handleDeleteUser = (user) => {
         Swal.fire({
             title: "Are you sure?",
             text: "You won't be able to revert this!",
@@ -42,24 +51,22 @@ const AllUsers = () => {
             showCancelButton: true,
             confirmButtonColor: "#3085d6",
             cancelButtonColor: "#d33",
-            confirmButtonText: "Yes, delete it!"
+            confirmButtonText: "Yes, delete it!",
         }).then((result) => {
             if (result.isConfirmed) {
-
-                axiosSecure.delete(`/users/${user._id}`)
-                    .then(res => {
-                        if (res.data.deletedCount > 0) {
-                            refetch();
-                            Swal.fire({
-                                title: "Deleted!",
-                                text: `${user.name} has been removed.`,
-                                icon: "success"
-                            });
-                        }
-                    })
+                axiosSecure.delete(`/users/${user._id}`).then((res) => {
+                    if (res.data.deletedCount > 0) {
+                        refetch();
+                        Swal.fire({
+                            title: "Deleted!",
+                            text: `${user.name} has been removed.`,
+                            icon: "success",
+                        });
+                    }
+                });
             }
         });
-    }
+    };
 
     return (
         <section>
@@ -69,12 +76,15 @@ const AllUsers = () => {
             <div className="min-h-screen">
                 <div className="mb-3">
                     <SectionTitle heading="All Users"></SectionTitle>
-                    {isLoading && <div className="flex justify-center items-center"><span className="loading loading-bars loading-lg"></span></div>}
+                    {isLoading && (
+                        <div className="flex justify-center items-center">
+                            <span className="loading loading-bars loading-lg"></span>
+                        </div>
+                    )}
                     <h2 className="text-xl">Total Users: {users.length}</h2>
                 </div>
                 <div className="overflow-x-auto">
                     <table className="table-auto table-striped w-full text-center">
-                        {/* head */}
                         <thead>
                             <tr>
                                 <th className="px-4 py-2">#</th>
@@ -86,37 +96,61 @@ const AllUsers = () => {
                             </tr>
                         </thead>
                         <tbody>
-                            {
-                                users.map((user, index) => <tr key={user._id}>
-                                    <th className="px-4 py-2">{index + 1}</th>
-                                    <th className="px-4 py-2"><div className="avatar">
-                                        <div className="mask mask-squircle h-12 w-12">
-                                            <img
-                                                src={user.photo}
-                                                alt="Avatar Tailwind CSS Component" />
+                            {currentUsers.map((user, index) => (
+                                <tr key={user._id}>
+                                    <th className="px-4 py-2">{offset + index + 1}</th>
+                                    <td className="px-4 py-2">
+                                        <div className="avatar">
+                                            <div className="mask mask-squircle h-12 w-12">
+                                                <img
+                                                    src={user.photo}
+                                                    alt="Avatar Tailwind CSS Component"
+                                                />
+                                            </div>
                                         </div>
-                                    </div></th>
+                                    </td>
                                     <td className="px-4 py-2">{user.name}</td>
                                     <td className="px-4 py-2">{user.email}</td>
                                     <td className="px-4 py-2">
-                                        {user.role === 'admin' ? 'Admin' : <button
-                                            onClick={() => handleMakeAdmin(user)}
-                                            className="btn btn-lg bg-opacity-0 border-none shadow-none">
-                                            <FaUser className=""></FaUser>
-                                        </button>}
+                                        {user.role === "admin" ? (
+                                            "Admin"
+                                        ) : (
+                                            <button
+                                                onClick={() => handleMakeAdmin(user)}
+                                                className="btn btn-lg bg-opacity-0 border-none shadow-none"
+                                            >
+                                                <FaUser />
+                                            </button>
+                                        )}
                                     </td>
                                     <td className="px-4 py-2">
                                         <button
                                             onClick={() => handleDeleteUser(user)}
-                                            className="btn btn-ghost btn-lg">
-                                            <FaTrashAlt className="text-red-600"></FaTrashAlt>
+                                            className="btn btn-ghost btn-lg"
+                                        >
+                                            <FaTrashAlt className="text-red-600" />
                                         </button>
                                     </td>
-                                </tr>)
-                            }
-
+                                </tr>
+                            ))}
                         </tbody>
                     </table>
+                </div>
+                <div className="flex justify-center mt-4">
+                    <ReactPaginate
+                        breakLabel="..."
+                        nextLabel="Next >"
+                        onPageChange={handlePageClick}
+                        pageRangeDisplayed={5}
+                        pageCount={pageCount}
+                        previousLabel="< Prev"
+                        renderOnZeroPageCount={null}
+                        containerClassName="pagination"
+                        activeClassName="bg-blue-500 text-white px-3 py-1 rounded"
+                        pageClassName="px-2 py-1 mx-1 rounded border"
+                        previousClassName="px-3 py-1 mx-1 border rounded"
+                        nextClassName="px-3 py-1 mx-1 border rounded"
+                    />
                 </div>
             </div>
         </section>
