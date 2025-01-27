@@ -10,10 +10,10 @@ const Dashboard = () => {
     };
 
     return (
-        <div className="">
+        <div className="bg-gradient-to-r from-yellow-400 via-red-500 to-pink-500 border-yellow-500 shadow-2xl transform">
             {/* Sidebar Toggle Button */}
             <button
-                className="flex btn btn-outline border-none text-gray-700 mt-4 ml-4 text-base font-bold"
+                className="flex btn btn-outline border-none text-gray-700 p-4 text-base font-bold"
                 onClick={toggleDrawer}
             >
                 {isDrawerOpen ? <FaMinus /> : <FaPlus />}
@@ -22,7 +22,7 @@ const Dashboard = () => {
             <div className={`drawer ${isDrawerOpen ? 'drawer-open' : ''}`}>
                 {/* Drawer container */}
                 <input id="dashboard-drawer" type="checkbox" className="drawer-toggle" checked={isDrawerOpen} readOnly />
-                <div className="drawer-content flex flex-col py-4 pl-5">
+                <div className="drawer-content flex flex-col py-4 pl-5 bg-gradient-to-r from-blue-300 via-purple-300 to-indigo-300 border-blue-500 transform shadow-lg rounded-lg p-6">
                     {/* Page content here */}
                     <Outlet />
                 </div>
@@ -34,7 +34,7 @@ const Dashboard = () => {
                         onClick={toggleDrawer}
                     ></label>
 
-                    <ul className="menu min-h-screen w-max bg-green-500 text-base">
+                    <ul className="menu min-h-screen w-max bg-green-500 text-base rounded-lg">
                     <li>
                         <NavLink to="/dashboard/adminHome" onClick={toggleDrawer}>
                             <FaHome /> Admin Home

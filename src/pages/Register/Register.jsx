@@ -8,11 +8,13 @@ import SocialLogin from "../../component/SocialLogin/SocialLogin";
 import { useEffect, useState } from "react";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import useAxiosPublic from "../../hooks/useAxiosPublic";
+import useArticles from "../../hooks/useArticles";
 
 const Register = () => {
     const axiosPublic = useAxiosPublic();
+    const { refetch } = useArticles();
     const { register, handleSubmit, reset, formState: { errors } } = useForm();
-    const { createUser, updateUserProfile, user, loading } = useAuth();
+    const { createUser, updateUserProfile, user, setUser, loading } = useAuth();
     const navigate = useNavigate();
     const [showPassword, setShowPassword] = useState(false);
 
@@ -23,40 +25,43 @@ const Register = () => {
         }
     }, [user, navigate]);
 
-    const onSubmit = data => {
-
-        createUser(data.email, data.password)
-            .then(result => {
-                const loggedUser = result.user;
-                console.log(loggedUser);
-                updateUserProfile(data.name, data.photoURL)
-                    .then(() => {
-                        // create user entry in the database
-                        const userInfo = {
-                            name: data.name,
-                            email: data.email,
-                            photo: data.photoURL
-                        }
-                        axiosPublic.post('/users', userInfo)
-                            .then(res => {
-                                if (res.data.insertedId) {
-                                    console.log('user added to the database')
-                                    reset();
-                                    Swal.fire({
-                                        position: 'top-end',
-                                        icon: 'success',
-                                        title: 'User created successfully.',
-                                        showConfirmButton: false,
-                                        timer: 1500
-                                    });
-                                    navigate('/');
-                                }
-                            })
-
-
-                    })
-                    .catch(error => console.log(error))
-            })
+    const onSubmit = async (data) => {
+        try {
+            const result = await createUser(data.email, data.password);
+            const loggedUser = result.user;
+    
+            await updateUserProfile(data.name, data.photoURL);
+            
+            const userInfo = {
+                name: data.name,
+                email: data.email,
+                photo: data.photoURL,
+            };
+    
+            const response = await axiosPublic.post('/users', userInfo);
+            if (response.data.insertedId) {
+                // Force the user state update
+                setUser({
+                    ...loggedUser,
+                    displayName: data.name,
+                    photoURL: data.photoURL,
+                });
+    
+                refetch(); // Optional, to refresh data like articles
+    
+                reset();
+                Swal.fire({
+                    position: 'top-end',
+                    icon: 'success',
+                    title: 'User created successfully.',
+                    showConfirmButton: false,
+                    timer: 1500,
+                });
+                navigate('/');
+            }
+        } catch (error) {
+            console.error(error);
+        }
     };
     return (
         <section>
@@ -64,13 +69,13 @@ const Register = () => {
                 <title>Insightly | Sign Up</title>
             </Helmet>
 
-            <div className="min-h-screen flex justify-center items-center">
+            <div className="min-h-screen flex justify-center bg-gradient-to-r from-yellow-400 via-red-500 to-pink-500 border-yellow-500 shadow-2xl transform">
                 {loading ? (
                     <div className="flex justify-center items-center min-h-screen">
                         <span className="loading loading-bars loading-lg"></span>
                     </div>
                 ) : (
-                    <div className="card w-full max-w-xl shadow-2xl p-10">
+                    <div className="card w-full max-w-xl shadow-2xl p-10 bg-gradient-to-r from-blue-300 via-purple-300 to-indigo-300 border-blue-500 transform rounded-lg">
                         <SectionTitle heading="Sign Up" subHeading="Join us! Create your account today"></SectionTitle>
                         <form onSubmit={handleSubmit(onSubmit)} className="card-body">
                             <div className="form-control">

@@ -23,7 +23,7 @@ const PremiumArticles = () => {
             <Helmet>
                 <title>Insightly | Premium Articles</title>
             </Helmet>
-            <div className="min-h-screen">
+            <div className="min-h-screen bg-gradient-to-r from-blue-300 via-purple-300 to-indigo-300 border-blue-500 transform shadow-lg rounded-lg p-6">
                 <SectionTitle heading="Premium Articles" subHeading="Explore our premium content" />
 
                 {isLoading ? (

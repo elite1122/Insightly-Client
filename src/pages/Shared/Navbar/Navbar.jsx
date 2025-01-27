@@ -1,10 +1,16 @@
 import { Link, NavLink } from 'react-router-dom';
 import logo from '../../../assets/insightly.png'
 import useAuth from '../../../hooks/useAuth';
+import { useEffect, useState } from 'react';
 
 const Navbar = () => {
 
     const { user, logOut, loading } = useAuth();
+    const [renderKey, setRenderKey] = useState(0);
+
+    useEffect(() => {
+        setRenderKey((prev) => prev + 1);
+    }, [user]);
 
     if (loading) {
         return <div className="flex justify-center items-center min-h-screen"><span className="loading loading-bars loading-lg"></span></div>;
@@ -71,23 +77,25 @@ const Navbar = () => {
         </div>
         {user?.photoURL ? (
             <div className="relative group flex flex-col lg:flex-row gap-3">
-                <div
-                    tabIndex="0"
-                    role="button"
-                    className="btn btn-ghost btn-circle avatar group"
-                >
-                    <div className="w-10 rounded-full">
-                        <img
-                            referrerPolicy="no-referrer"
-                            alt="User Avatar"
-                            src={user.photoURL}
-                        />
+                <Link to="/profile">
+                    <div
+                        tabIndex="0"
+                        role="button"
+                        className="btn btn-ghost btn-circle avatar group"
+                    >
+                        <div className="w-10 rounded-full">
+                            <img
+                                referrerPolicy="no-referrer"
+                                alt="User Avatar"
+                                src={user.photoURL}
+                            />
+                        </div>
+                        {/* Hover Display */}
+                        <span className="absolute hidden group-hover:flex items-center justify-center bg-gray-800 text-white text-sm px-4 py-1 rounded-md -bottom-10 left-1/2 transform -translate-x-1/2 w-max">
+                            {user.displayName}
+                        </span>
                     </div>
-                    {/* Hover Display */}
-                    <span className="absolute hidden group-hover:flex items-center justify-center bg-gray-800 text-white text-sm px-4 py-1 rounded-md -bottom-10 left-1/2 transform -translate-x-1/2 w-max">
-                        {user.displayName}
-                    </span>
-                </div>
+                </Link>
                 <button
                     onClick={logOut}
                     className="lg:flex btn btn-outline text-gray-700 dark:text-white"
@@ -122,7 +130,7 @@ const Navbar = () => {
     </>
 
     return (
-        <div className='shadow-md sticky top-0 z-50 transition-colors duration-300 bg-white bg-opacity-30 text-black'>
+        <div className={`shadow-md sticky top-0 z-50 transition-colors duration-300 bg-white bg-opacity-30 text-black`} key={renderKey}>
             <div className="flex justify-between w-11/12 mx-auto items-center py-3 flex-wrap">
                 {/* Logo */}
                 <div>

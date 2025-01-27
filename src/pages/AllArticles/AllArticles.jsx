@@ -49,7 +49,7 @@ const AllArticles = () => {
             <Helmet>
                 <title>Insightly | All Articles</title>
             </Helmet>
-            <div className="min-h-screen">
+            <div className="min-h-screen bg-gradient-to-r from-blue-300 via-purple-300 to-indigo-300 border-blue-500 transform shadow-lg rounded-lg p-6">
                 <SectionTitle heading="All Articles" subHeading="See all the articles here" />
                 <div className="flex gap-4 mb-6 justify-between flex-col lg:flex-row">
                     <input

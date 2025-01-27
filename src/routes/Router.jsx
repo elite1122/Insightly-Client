@@ -18,6 +18,7 @@ import ManageArticles from "../pages/Dashboard/InDashboard/ManageArticles";
 import AllUsers from "../pages/Dashboard/InDashboard/AllUsers";
 import UpdateArticles from "../pages/UpdateArticles/UpdateArticles";
 import ArticleDetails from "../component/ArticleDetails/ArticleDetails";
+import Profile from "../pages/Profile/Profile";
 
 
   export const router = createBrowserRouter([
@@ -83,6 +84,10 @@ import ArticleDetails from "../component/ArticleDetails/ArticleDetails";
         {
             path: 'premiumArticles',
             element: <PremiumArticles></PremiumArticles>,
+        },
+        {
+            path: 'profile',
+            element: <Profile></Profile>,
         },
         {
             path: 'login',

@@ -74,25 +74,25 @@ const MyArticles = () => {
             <Helmet>
                 <title>Insightly | My Articles</title>
             </Helmet>
-            <div className="min-h-screen">
+            <div className="min-h-screen bg-gradient-to-r from-blue-300 via-purple-300 to-indigo-300 border-blue-500 transform shadow-lg rounded-lg p-6">
             <SectionTitle heading="My Articles" subHeading="All your articles are here"></SectionTitle>
             <div className="overflow-x-auto">
-                <table className="table-auto w-full border-collapse border border-gray-200">
+                <table className="table-auto table-striped w-full text-center">
                     <thead>
-                        <tr className="bg-gray-100">
-                            <th className="border p-4">#</th>
-                            <th className="border p-4">Title</th>
-                            <th className="border p-4">Status</th>
-                            <th className="border p-4">Premium</th>
-                            <th className="border p-4">Actions</th>
+                        <tr className="px-4 py-2">
+                            <th className="px-4 py-2">#</th>
+                            <th className="px-4 py-2">Title</th>
+                            <th className="px-4 py-2">Status</th>
+                            <th className="px-4 py-2">Premium</th>
+                            <th className="px-4 py-2">Actions</th>
                         </tr>
                     </thead>
                     <tbody>
                         {articles.map((article, index) => (
-                            <tr key={article._id} className="text-center">
-                                <td className="border p-4">{index + 1}</td>
-                                <td className="border p-4">{article.title}</td>
-                                <td className="border p-4">
+                            <tr key={article._id}>
+                                <td className="px-4 py-2">{index + 1}</td>
+                                <td className="px-4 py-2">{article.title}</td>
+                                <td className="px-4 py-2">
                                     {article.isApproved
                                         ? "Approved"
                                         : article.isDeclined
@@ -107,8 +107,8 @@ const MyArticles = () => {
                                             </div>
                                         : "Pending"}
                                 </td>
-                                <td className="border p-4">{article.isPremium ? "Yes" : "No"}</td>
-                                <td className="border p-4">
+                                <td className="px-4 py-2">{article.isPremium ? "Yes" : "No"}</td>
+                                <td className="px-4 py-2">
                                     <div className="flex flex-col lg:flex-row space-y-2 lg:space-y-0 justify-center">
                                         <button
                                             className="btn btn-primary mr-2"
@@ -123,7 +123,7 @@ const MyArticles = () => {
                                             Update
                                         </button>
                                         <button
-                                            className="btn btn-danger"
+                                            className="btn btn-error"
                                             onClick={() => handleDelete(article._id)}
                                         >
                                             Delete

@@ -77,7 +77,7 @@ const AdminHome = () => {
                 <title>Insightly | Admin Home</title>
             </Helmet>
             <div className="min-h-screen">
-                <SectionTitle heading="Admin Home"></SectionTitle>
+                <SectionTitle heading="Admin Home" subHeading="Welcome to Admin Home"></SectionTitle>
                 <div className="grid gap-8 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
                     {/* Pie Chart */}
                     <div className="shadow-lg p-4 bg-white rounded-lg overflow-x-auto">
