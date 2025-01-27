@@ -42,7 +42,7 @@ const TrendingArticles = () => {
             <Helmet>
                 <title>Insightly | Trending Articles</title>
             </Helmet>
-            <div className="p-6 min-h-screen">
+            <div className="p-6">
                 <SectionTitle heading="Trending Articles"></SectionTitle>
                 {isLoading ? (
                     <div className="flex justify-center items-center min-h-screen">
