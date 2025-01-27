@@ -133,10 +133,10 @@ const Navbar = () => {
         <div className={`shadow-md sticky top-0 z-50 transition-colors duration-300 text-black bg-gradient-to-r from-blue-300 via-purple-300 to-indigo-300 border-blue-500 transform`} key={renderKey}>
             <div className="flex justify-between w-11/12 mx-auto items-center py-3 flex-wrap">
                 {/* Logo */}
-                <div>
+                <div className=''>
                     <Link to={'/'}>
                         <img
-                            className="w-16 h-12 btn"
+                            className="w-16 h-12 btn object-cover"
                             src={logo}
                             alt="" />
                     </Link>

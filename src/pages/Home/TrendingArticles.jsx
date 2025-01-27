@@ -4,7 +4,6 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { useQuery } from "@tanstack/react-query";
 import useAxiosPublic from "../../hooks/useAxiosPublic";
-import { Helmet } from "react-helmet-async";
 import SectionTitle from "../../component/SectionTitle/SectionTitle";
 import { Link } from "react-router-dom";
 
@@ -39,11 +38,8 @@ const TrendingArticles = () => {
 
     return (
         <section>
-            <Helmet>
-                <title>Insightly | Trending Articles</title>
-            </Helmet>
             <div className="p-6">
-                <SectionTitle heading="Trending Articles"></SectionTitle>
+                <SectionTitle heading="Trending Articles" subHeading="Stay updated with the latest and most popular reads"></SectionTitle>
                 {isLoading ? (
                     <div className="flex justify-center items-center min-h-screen">
                         <span className="loading loading-bars loading-lg"></span>
@@ -59,7 +55,7 @@ const TrendingArticles = () => {
                                                 <img
                                                     src={article.image}
                                                     alt={article.title}
-                                                    className="w-full h-64 object-cover rounded-lg mb-4"
+                                                    className="w-full h-48 md:h-64 object-cover rounded-lg mb-4"
                                                 />
                                             )}
                                             <h3 className="text-xl font-bold mb-2">{article.title}</h3>

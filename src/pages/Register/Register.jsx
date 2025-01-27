@@ -8,11 +8,11 @@ import SocialLogin from "../../component/SocialLogin/SocialLogin";
 import { useEffect, useState } from "react";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import useAxiosPublic from "../../hooks/useAxiosPublic";
-import useArticles from "../../hooks/useArticles";
+import useUsers from "../../hooks/useUsers";
 
 const Register = () => {
     const axiosPublic = useAxiosPublic();
-    const { refetch } = useArticles();
+    const { refetch } = useUsers();
     const { register, handleSubmit, reset, formState: { errors } } = useForm();
     const { createUser, updateUserProfile, user, setUser, loading } = useAuth();
     const navigate = useNavigate();
@@ -36,6 +36,7 @@ const Register = () => {
                 name: data.name,
                 email: data.email,
                 photo: data.photoURL,
+                role: "user",
             };
     
             const response = await axiosPublic.post('/users', userInfo);

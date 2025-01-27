@@ -1,7 +1,6 @@
 import React from "react";
 import { useQuery } from "@tanstack/react-query";
 import useAxiosPublic from "../../hooks/useAxiosPublic";
-import { Helmet } from "react-helmet-async";
 import SectionTitle from "../../component/SectionTitle/SectionTitle";
 
 const AllPublishers = () => {
@@ -18,11 +17,8 @@ const AllPublishers = () => {
 
     return (
         <section>
-            <Helmet>
-                <title>Insightly | All Publishers</title>
-            </Helmet>
             <div className="p-6">
-                <SectionTitle heading="All Publishers"></SectionTitle>
+                <SectionTitle heading="All Publishers" subHeading="Explore a variety of publishers to suit your preferences"></SectionTitle>
                 {isLoading ? (
                     <div className="flex justify-center items-center min-h-screen">
                         <span className="loading loading-bars loading-lg"></span>
