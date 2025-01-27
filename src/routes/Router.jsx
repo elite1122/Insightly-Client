@@ -17,6 +17,7 @@ import AdminHome from "../pages/Dashboard/InDashboard/AdminHome";
 import ManageArticles from "../pages/Dashboard/InDashboard/ManageArticles";
 import AllUsers from "../pages/Dashboard/InDashboard/AllUsers";
 import UpdateArticles from "../pages/UpdateArticles/UpdateArticles";
+import ArticleDetails from "../component/ArticleDetails/ArticleDetails";
 
 
   export const router = createBrowserRouter([
@@ -74,6 +75,10 @@ import UpdateArticles from "../pages/UpdateArticles/UpdateArticles";
         {
             path: 'myArticles',
             element: <MyArticles></MyArticles>,
+        },
+        {
+            path: 'articles/:id',
+            element: <ArticleDetails></ArticleDetails>,
         },
         {
             path: 'premiumArticles',

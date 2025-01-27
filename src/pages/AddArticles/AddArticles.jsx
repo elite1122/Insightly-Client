@@ -7,6 +7,7 @@ import SectionTitle from "../../component/SectionTitle/SectionTitle";
 import useAuth from "../../hooks/useAuth";
 import useAxiosPublic from "../../hooks/useAxiosPublic";
 import { useQuery } from "@tanstack/react-query";
+import { Helmet } from "react-helmet-async";
 
 const AddArticle = () => {
     const { user } = useAuth();
@@ -84,51 +85,60 @@ const AddArticle = () => {
     };
 
     return (
-        <div className="min-h-screen flex justify-center items-center">
-            <div className="card w-full md:max-w-xl shadow-2xl p-10">
-                <SectionTitle heading="Add New Article" subHeading="Please fill up the form to add a new article"></SectionTitle>
-                <form onSubmit={handleSubmit(onSubmit)} className="card-body">
-                    <div className="form-control">
-                        <label className="label">Title</label>
-                        <input {...register("title", { required: true })} className="input input-bordered bg-white text-black" />
-                    </div>
-                    <div className="form-control">
-                        <label className="label">Image</label>
-                        <input type="file" {...register("image", { required: true })} className="input input-bordered bg-white text-black" />
-                    </div>
-                    <div className="form-control">
-                        <label className="label">Publisher</label>
-                        {isLoading ? (
-                            <p>Loading publishers...</p>
-                        ) : error ? (
-                            <p className="text-red-500">Failed to load publishers.</p>
-                        ) : (
-                            <select {...register("publisher", { required: true })} className="select select-bordered w-full">
-                                <option value="">Select Publisher</option>
-                                {publishers.map(publisher => (
-                                    <option key={publisher._id} value={publisher.name}>{publisher.name}</option>
-                                ))}
-                            </select>
-                        )}
-                    </div>
-                    <div className="form-control">
-                        <label className="label">Tags</label>
-                        <Select
-                            isMulti
-                            options={tagOptions}
-                            value={selectedTags}
-                            onChange={setSelectedTags}
-                            className="w-full"
-                        />
-                    </div>
-                    <div className="form-control">
-                        <label className="label">Description</label>
-                        <textarea {...register("description", { required: true })} className="textarea textarea-bordered bg-white text-black" />
-                    </div>
-                    <button type="submit" className="btn btn-primary mt-3">Submit</button>
-                </form>
+        <section>
+            <Helmet>
+                <title>Insightly | Add Article</title>
+            </Helmet>
+            <div className="min-h-screen flex justify-center items-center">
+                <div className="card w-full md:max-w-xl shadow-2xl p-10">
+                    <SectionTitle heading="Add New Article" subHeading="Please fill up the form to add a new article"></SectionTitle>
+                    <form onSubmit={handleSubmit(onSubmit)} className="card-body">
+                        <div className="form-control">
+                            <label className="label">Title</label>
+                            <input {...register("title", { required: true })}
+                                className="input input-bordered bg-white text-black"
+                                placeholder="Type article title" />
+                        </div>
+                        <div className="form-control">
+                            <label className="label">Image</label>
+                            <input type="file" {...register("image", { required: true })} className="input input-bordered bg-white text-black" />
+                        </div>
+                        <div className="form-control">
+                            <label className="label">Publisher</label>
+                            {isLoading ? (
+                                <p>Loading publishers...</p>
+                            ) : error ? (
+                                <p className="text-red-500">Failed to load publishers.</p>
+                            ) : (
+                                <select {...register("publisher", { required: true })} className="select select-bordered w-full">
+                                    <option value="">Select Publisher</option>
+                                    {publishers.map(publisher => (
+                                        <option key={publisher._id} value={publisher.name}>{publisher.name}</option>
+                                    ))}
+                                </select>
+                            )}
+                        </div>
+                        <div className="form-control">
+                            <label className="label">Tags</label>
+                            <Select
+                                isMulti
+                                options={tagOptions}
+                                value={selectedTags}
+                                onChange={setSelectedTags}
+                                className="w-full"
+                            />
+                        </div>
+                        <div className="form-control">
+                            <label className="label">Description</label>
+                            <textarea {...register("description", { required: true })}
+                                className="textarea textarea-bordered bg-white text-black"
+                                placeholder="Type article description" />
+                        </div>
+                        <button type="submit" className="btn btn-primary mt-3">Submit</button>
+                    </form>
+                </div>
             </div>
-        </div>
+        </section>
     );
 };
 

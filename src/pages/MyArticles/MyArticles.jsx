@@ -5,6 +5,7 @@ import useAxiosPublic from "../../hooks/useAxiosPublic";
 import useAuth from "../../hooks/useAuth";
 import Swal from "sweetalert2";
 import SectionTitle from "../../component/SectionTitle/SectionTitle";
+import { Helmet } from "react-helmet-async";
 
 const MyArticles = () => {
     const axiosPublic = useAxiosPublic();
@@ -69,7 +70,11 @@ const MyArticles = () => {
     }
 
     return (
-        <div className="p-6 min-h-screen">
+        <section>
+            <Helmet>
+                <title>Insightly | My Articles</title>
+            </Helmet>
+            <div className="min-h-screen">
             <SectionTitle heading="My Articles" subHeading="All your articles are here"></SectionTitle>
             <div className="overflow-x-auto">
                 <table className="table-auto w-full border-collapse border border-gray-200">
@@ -131,6 +136,7 @@ const MyArticles = () => {
                 </table>
             </div>
         </div>
+        </section>
     );
 };
 

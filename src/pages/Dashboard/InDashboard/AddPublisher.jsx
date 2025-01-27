@@ -50,32 +50,32 @@ const AddPublisher = () => {
     return (
         <section>
             <Helmet><title>Insightly | Add Publisher</title></Helmet>
-            <div className="min-h-screen flex justify-center items-center">
+            <div className="min-h-screen flex justify-center">
                 {loading ? (
                     <div className="flex justify-center items-center min-h-screen">
                         <span className="loading loading-bars loading-lg"></span>
                     </div>
                 ) : (
-                    <div className="card w-full max-w-xl shadow-2xl p-10">
-                        <SectionTitle heading="Add New Publisher"></SectionTitle>
+                    <div className="card w-full max-w-xl shadow-2xl p-10 h-max">
+                        <SectionTitle heading="Add New Publisher" subHeading="Please fill up the form to add a new publisher"></SectionTitle>
                         <form onSubmit={handleSubmit(onSubmit)}>
-                            <div className="mb-4">
-                                <label className="block text-gray-700 font-medium mb-2">Publisher Name</label>
+                            <div className="form-control">
+                                <label className="label">Publisher Name</label>
                                 <input
                                     type="text"
                                     {...register("publisherName", { required: "Publisher name is required" })}
-                                    className="w-full p-2 border rounded"
+                                    className="input input-bordered bg-white text-black"
                                     placeholder="Enter publisher name"
                                 />
                                 {errors.publisherName && <span className="text-red-500">{errors.publisherName.message}</span>}
                             </div>
 
-                            <div className="mb-4">
-                                <label className="block text-gray-700 font-medium mb-2">Publisher Logo</label>
+                            <div className="form-control">
+                                <label className="label">Publisher Logo</label>
                                 <input
                                     type="file"
                                     {...register("publisherLogo", { required: "Publisher logo is required" })}
-                                    className="w-full p-2 border rounded"
+                                    className="input input-bordered bg-white text-black"
                                     accept="image/*"
                                 />
                                 {errors.publisherLogo && <span className="text-red-500">{errors.publisherLogo.message}</span>}
@@ -83,7 +83,7 @@ const AddPublisher = () => {
 
                             <button
                                 type="submit"
-                                className="w-full bg-blue-500 text-white p-2 rounded hover:bg-blue-600"
+                                className="w-full btn btn-primary mt-3 mb-8"
                             >
                                 Add Publisher
                             </button>
