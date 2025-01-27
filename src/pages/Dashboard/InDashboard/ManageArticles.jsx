@@ -1,10 +1,11 @@
-
+import React, { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { FaCheck, FaTimes, FaStar, FaTrashAlt, FaCrown } from "react-icons/fa";
 import Swal from "sweetalert2";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import SectionTitle from "../../../component/SectionTitle/SectionTitle";
 import { Helmet } from "react-helmet-async";
+import ReactPaginate from "react-paginate";
 
 const ManageArticles = () => {
     const axiosSecure = useAxiosSecure();
@@ -13,9 +14,24 @@ const ManageArticles = () => {
         queryFn: async () => {
             const res = await axiosSecure.get("/articles");
             return res.data;
-        }
+        },
     });
 
+    // Pagination state
+    const [currentPage, setCurrentPage] = useState(0);
+    const itemsPerPage = 5;
+
+    const pageCount = Math.ceil(articles.length / itemsPerPage);
+    const displayedArticles = articles.slice(
+        currentPage * itemsPerPage,
+        currentPage * itemsPerPage + itemsPerPage
+    );
+
+    const handlePageClick = (selectedPage) => {
+        setCurrentPage(selectedPage.selected);
+    };
+
+    // Handle actions (approve, decline, delete, premium)
     const handleApprove = async (id, isApproved) => {
         if (isApproved) {
             Swal.fire("Info", "This article is already approved!", "info");
@@ -88,7 +104,6 @@ const ManageArticles = () => {
         }
     };
 
-
     return (
         <section>
             <Helmet>
@@ -97,7 +112,11 @@ const ManageArticles = () => {
             <div className="min-h-screen">
                 <div className="mb-3">
                     <SectionTitle heading="Manage Articles"></SectionTitle>
-                    {isLoading && <div className="flex justify-center items-center"><span className="loading loading-bars loading-lg"></span></div>}
+                    {isLoading && (
+                        <div className="flex justify-center items-center">
+                            <span className="loading loading-bars loading-lg"></span>
+                        </div>
+                    )}
                 </div>
                 <div className="overflow-x-auto">
                     <table className="table-auto table-striped w-full text-center">
@@ -113,29 +132,58 @@ const ManageArticles = () => {
                             </tr>
                         </thead>
                         <tbody>
-                            {articles.map((article, index) => (
+                            {displayedArticles.map((article, index) => (
                                 <tr key={article._id}>
-                                    <th className="px-4 py-2">{index + 1}</th>
+                                    <th className="px-4 py-2">
+                                        {currentPage * itemsPerPage + index + 1}
+                                    </th>
                                     <td className="px-4 py-2">{article.title}</td>
                                     <td className="px-4 py-2">{article.authorName}</td>
                                     <td className="px-4 py-2">{article.authorEmail}</td>
-                                    <td className="px-4 py-2">{new Date(article.postDate).toLocaleDateString()}</td>
+                                    <td className="px-4 py-2">
+                                        {new Date(article.postDate).toLocaleDateString()}
+                                    </td>
                                     <td className="px-4 py-2">
                                         {article.isApproved
                                             ? "Approved"
                                             : article.isDeclined
-                                                ? "Declined"
-                                                : "Pending"}
+                                            ? "Declined"
+                                            : "Pending"}
                                     </td>
                                     <td className="px-4 py-2">
                                         <div className="flex flex-col lg:flex-row space-y-2 lg:space-y-0 gap-2 lg:justify-center">
-                                            <button onClick={() => handleApprove(article._id, article.isApproved)} className="btn btn-success"><FaCheck /></button>
-                                            <button onClick={() => handleDecline(article._id)} className="btn btn-warning"><FaTimes /></button>
-                                            <button onClick={() => handleDelete(article._id)} className="btn btn-danger text-red-600"><FaTrashAlt /></button>
                                             <button
-                                                onClick={() => handleMakePremium(article._id, article.isPremium)}
-                                                className={`btn btn-primary ${article.isPremium ? "bg-orange-400 border-none hover:bg-orange-500" : ""
-                                                    }`}
+                                                onClick={() =>
+                                                    handleApprove(article._id, article.isApproved)
+                                                }
+                                                className="btn btn-success"
+                                            >
+                                                <FaCheck />
+                                            </button>
+                                            <button
+                                                onClick={() => handleDecline(article._id)}
+                                                className="btn btn-warning"
+                                            >
+                                                <FaTimes />
+                                            </button>
+                                            <button
+                                                onClick={() => handleDelete(article._id)}
+                                                className="btn btn-danger text-red-600"
+                                            >
+                                                <FaTrashAlt />
+                                            </button>
+                                            <button
+                                                onClick={() =>
+                                                    handleMakePremium(
+                                                        article._id,
+                                                        article.isPremium
+                                                    )
+                                                }
+                                                className={`btn btn-primary ${
+                                                    article.isPremium
+                                                        ? "bg-orange-400 border-none hover:bg-orange-500"
+                                                        : ""
+                                                }`}
                                             >
                                                 {article.isPremium ? <FaCrown /> : <FaStar />}
                                             </button>
@@ -145,6 +193,21 @@ const ManageArticles = () => {
                             ))}
                         </tbody>
                     </table>
+                </div>
+
+                {/* Pagination */}
+                <div className="mt-4 flex flex-row justify-center">
+                    <ReactPaginate
+                        previousLabel={"Previous"}
+                        nextLabel={"Next"}
+                        pageCount={pageCount}
+                        onPageChange={handlePageClick}
+                        containerClassName={"pagination flex flex-col gap-2"}
+                        activeClassName={"active text-white bg-blue-500"}
+                        pageClassName={"border border-gray-300 rounded px-3 py-1 cursor-pointer"}
+                        previousClassName={"border border-gray-300 rounded px-3 py-1 cursor-pointer"}
+                        nextClassName={"border border-gray-300 rounded px-3 py-1 cursor-pointer"}
+                    />
                 </div>
             </div>
         </section>
