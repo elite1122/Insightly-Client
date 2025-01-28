@@ -51,11 +51,36 @@ const AddArticle = () => {
         },
     });
 
+    // Fetch user data using TanStack Query
+    const { data: fetchedUser, isLoading: userLoading, error: userError } = useQuery({
+        queryKey: ["user", user?.email],
+        queryFn: async () => {
+            const res = await axiosPublic.get(`/users/${user.email}`);
+            return res.data;
+        },
+        enabled: !!user?.email, // Ensure the query is triggered only if the user email is available
+    });
+
     const onSubmit = async (data) => {
         const formData = new FormData();
         formData.append("image", data.image[0]);
 
         try {
+            if (userLoading || userError) {
+                throw new Error("Error fetching user data.");
+            }
+
+            // Check if user is normal and has already submitted an article
+            // const userArticles = await axiosPublic.get(`/articles?authorEmail=${user.email}`);
+            // if (fetchedUser?.role !== "premium" && userArticles.data.length >= 1) {
+            //     Swal.fire(
+            //         "Limit Reached!",
+            //         "As a normal user, you can only publish one article. Upgrade to premium for unlimited articles.",
+            //         "warning"
+            //     );
+            //     return;
+            // }
+
             const imgRes = await axios.post(`https://api.imgbb.com/1/upload?key=${imgbbApiKey}`, formData);
             if (imgRes.data.success) {
                 const newArticle = {
@@ -63,14 +88,14 @@ const AddArticle = () => {
                     image: imgRes.data.data.url,
                     publisher: data.publisher,
                     description: data.description,
-                    tags: selectedTags.map(tag => tag.value),
+                    tags: selectedTags.map((tag) => tag.value),
                     isPremium: false,
                     isApproved: false,
                     authorName: user.displayName,
                     authorEmail: user.email,
                     authorPhoto: user.photoURL,
                     postDate: new Date(),
-                    views: 0
+                    views: 0,
                 };
 
                 await axiosPublic.post("/articles", newArticle);
@@ -80,9 +105,13 @@ const AddArticle = () => {
             }
         } catch (error) {
             console.error(error);
-            Swal.fire("Error!", "Something went wrong.", "error");
+            Swal.fire("Error!", error.message, "error");
         }
     };
+
+    if (!user) {
+        return <p>Please log in to add an article.</p>;
+    }
 
     return (
         <section>

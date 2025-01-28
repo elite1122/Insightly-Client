@@ -3,6 +3,7 @@ import TrendingArticles from './TrendingArticles';
 import AllPublishers from './AllPublishers';
 import Statistics from './Statistics';
 import Plans from './Plans';
+import SubscriptionAd from './SubscriptionAd';
 
 const Home = () => {
     return (
@@ -11,6 +12,7 @@ const Home = () => {
             <AllPublishers></AllPublishers>
             <Statistics></Statistics>
             <Plans></Plans>
+            <SubscriptionAd></SubscriptionAd>
         </div>
     );
 };
