@@ -5,6 +5,7 @@ import Statistics from './Statistics';
 import Plans from './Plans';
 import SubscriptionAd from './SubscriptionAd';
 import TopContributors from './TopContributors';
+import FrequentlyAskedQuestion from './FrequentlyAskedQuestion';
 
 const Home = () => {
     return (
@@ -14,6 +15,7 @@ const Home = () => {
             <Statistics></Statistics>
             <Plans></Plans>
             <TopContributors></TopContributors>
+            <FrequentlyAskedQuestion></FrequentlyAskedQuestion>
             <SubscriptionAd></SubscriptionAd>
         </div>
     );
