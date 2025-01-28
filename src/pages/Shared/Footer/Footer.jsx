@@ -52,8 +52,7 @@ const Footer = () => {
                         <h2 className="text-opacity-90 font-bold text-lg pb-3">Quick Links</h2>
                         <div className="text-opacity-70 flex flex-col space-y-2">
                             <li><Link to='/'>Home</Link></li>
-                            <li><Link to='/marathons'>All Marathons</Link></li>
-                            <li><Link to='/contact'>Contact us</Link></li>
+                            <li><Link to='/allArticles'>All Articles</Link></li>
                         </div>
                     </div>
                     {/* Right
