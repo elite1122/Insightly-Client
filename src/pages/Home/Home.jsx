@@ -4,6 +4,7 @@ import AllPublishers from './AllPublishers';
 import Statistics from './Statistics';
 import Plans from './Plans';
 import SubscriptionAd from './SubscriptionAd';
+import TopContributors from './TopContributors';
 
 const Home = () => {
     return (
@@ -12,6 +13,7 @@ const Home = () => {
             <AllPublishers></AllPublishers>
             <Statistics></Statistics>
             <Plans></Plans>
+            <TopContributors></TopContributors>
             <SubscriptionAd></SubscriptionAd>
         </div>
     );
