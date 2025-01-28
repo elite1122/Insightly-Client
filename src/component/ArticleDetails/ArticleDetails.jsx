@@ -46,35 +46,41 @@ const ArticleDetails = () => {
     }, [id]);
 
     return (
-        <section>
+        <section className="bg-gradient-to-r from-yellow-400 via-red-500 to-pink-500 border-yellow-500 shadow-2xl transform min-h-screen p-4 md:p-8">
             <Helmet>
                 <title>Insightly | Article Details</title>
             </Helmet>
-            <div className="p-6 min-h-screen">
-                {isLoading ? (
-                    <div className="flex justify-center items-center min-h-screen">
-                        <span className="loading loading-bars loading-lg"></span>
-                    </div>
-                ) : (
-                    <div className="max-w-3xl mx-auto bg-white shadow-lg rounded-lg p-6">
-                        <SectionTitle heading={article.title}></SectionTitle>
-                        {article.image && (
+
+            {isLoading ? (
+                <div className="flex justify-center items-center min-h-screen">
+                    <span className="loading loading-bars loading-lg"></span>
+                </div>
+            ) : (
+                <div className="max-w-4xl mx-auto bg-gradient-to-r from-blue-300 via-purple-300 to-indigo-300 border-blue-500 transform shadow-md rounded-lg p-6">
+                    <SectionTitle heading={article.title} />
+
+                    {article.image && (
+                        <div className="w-full aspect-[16/9] overflow-hidden rounded-lg mb-6">
                             <img
                                 src={article.image}
                                 alt={article.title}
-                                className="w-full rounded-lg mb-4"
+                                className="w-full h-full object-cover"
                             />
-                        )}
-                        <p className="text-gray-600 mb-2">
-                            <strong>Publisher:</strong> {article.publisher || "Unknown"}
+                        </div>
+                    )}
+
+                    <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between text-gray-600 text-sm mb-4">
+                        <p>
+                            <strong className="text-gray-800">Publisher:</strong> {article.publisher || "Unknown"}
                         </p>
-                        <p className="text-gray-600 mb-2">
-                            <strong>Views:</strong> {article.views || 0}
+                        <p>
+                            <strong className="text-gray-800">Views:</strong> {article.views || 0}
                         </p>
-                        <p className="text-gray-700 mt-4">{article.description}</p>
                     </div>
-                )}
-            </div>
+
+                    <p className="text-gray-700 leading-relaxed">{article.description}</p>
+                </div>
+            )}
         </section>
     );
 };
