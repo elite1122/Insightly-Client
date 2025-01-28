@@ -20,6 +20,7 @@ import UpdateArticles from "../pages/UpdateArticles/UpdateArticles";
 import ArticleDetails from "../component/ArticleDetails/ArticleDetails";
 import Profile from "../pages/Profile/Profile";
 import ErrorPage from "../component/ErrorPage/ErrorPage";
+import PrivateRoute from "./PrivateRoute";
 
 
   export const router = createBrowserRouter([
@@ -34,7 +35,7 @@ import ErrorPage from "../component/ErrorPage/ErrorPage";
         },
         {
             path: 'addArticles',
-            element: <AddArticles></AddArticles>,
+            element: <PrivateRoute><AddArticles></AddArticles></PrivateRoute>,
         },
         {
             path: 'updateArticles/:id',
@@ -46,11 +47,11 @@ import ErrorPage from "../component/ErrorPage/ErrorPage";
         },
         {
             path: 'subscription',
-            element: <Subscription></Subscription>,
+            element: <PrivateRoute><Subscription></Subscription></PrivateRoute>,
         },
         {
             path: 'dashboard',
-            element: <Dashboard></Dashboard>,
+            element: <PrivateRoute><Dashboard></Dashboard></PrivateRoute>,
             children: [
                 {
                     // Default route when visiting /dashboard
@@ -77,19 +78,19 @@ import ErrorPage from "../component/ErrorPage/ErrorPage";
         },
         {
             path: 'myArticles',
-            element: <MyArticles></MyArticles>,
+            element: <PrivateRoute><MyArticles></MyArticles></PrivateRoute>,
         },
         {
             path: 'articles/:id',
-            element: <ArticleDetails></ArticleDetails>,
+            element: <PrivateRoute><ArticleDetails></ArticleDetails></PrivateRoute>,
         },
         {
             path: 'premiumArticles',
-            element: <PremiumArticles></PremiumArticles>,
+            element: <PrivateRoute><PremiumArticles></PremiumArticles></PrivateRoute>,
         },
         {
             path: 'profile',
-            element: <Profile></Profile>,
+            element: <PrivateRoute><Profile></Profile></PrivateRoute>,
         },
         {
             path: 'login',
