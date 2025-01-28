@@ -21,6 +21,7 @@ import ArticleDetails from "../component/ArticleDetails/ArticleDetails";
 import Profile from "../pages/Profile/Profile";
 import ErrorPage from "../component/ErrorPage/ErrorPage";
 import PrivateRoute from "./PrivateRoute";
+import AdminRoute from "./AdminRoute";
 
 
   export const router = createBrowserRouter([
@@ -60,19 +61,19 @@ import PrivateRoute from "./PrivateRoute";
                 },
                 {
                     path: '/dashboard/adminHome',
-                    element: <AdminHome></AdminHome>,
+                    element: <AdminRoute><AdminHome></AdminHome></AdminRoute>,
                 },
                 {
                     path: '/dashboard/allUsers',
-                    element: <AllUsers></AllUsers>,
+                    element: <AdminRoute><AllUsers></AllUsers></AdminRoute>,
                 },
                 {
                     path: '/dashboard/manageArticles',
-                    element: <ManageArticles></ManageArticles>,
+                    element: <AdminRoute><ManageArticles></ManageArticles></AdminRoute>,
                 },
                 {
                     path: '/dashboard/addPublisher',
-                    element: <AddPublisher></AddPublisher>,
+                    element: <AdminRoute><AddPublisher></AddPublisher></AdminRoute>,
                 },
             ]
         },

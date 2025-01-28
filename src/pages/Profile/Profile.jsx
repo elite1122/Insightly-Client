@@ -2,13 +2,13 @@ import React, { useState, useEffect } from "react";
 import Swal from "sweetalert2";
 import useAuth from "../../hooks/useAuth";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
-import useAxiosSecure from "../../hooks/useAxiosSecure";
 import { Helmet } from "react-helmet-async";
 import SectionTitle from "../../component/SectionTitle/SectionTitle";
+import useAxiosPublic from "../../hooks/useAxiosPublic";
 
 const Profile = () => {
     const { user, updateUserProfile } = useAuth();
-    const axiosSecure = useAxiosSecure();
+    const axiosPublic = useAxiosPublic();
     const queryClient = useQueryClient();
     const [editMode, setEditMode] = useState(false);
     const [formData, setFormData] = useState({
@@ -21,7 +21,7 @@ const Profile = () => {
     const { data: userData, isLoading, isError } = useQuery({
         queryKey: ["userProfile", user?.email],  // Same queryKey
         queryFn: async () => {
-            const res = await axiosSecure.get(`/users/${user?.email}`); // Same queryFn
+            const res = await axiosPublic.get(`/users/${user?.email}`); // Same queryFn
             return res.data;
         },
         enabled: !!user?.email,  // Only run query if user email exists
@@ -51,7 +51,7 @@ const Profile = () => {
             await updateUserProfile(formData.name, formData.photo);
 
             // Update data in the backend
-            const response = await axiosSecure.patch(`/users/${user?.email}`, {
+            const response = await axiosPublic.patch(`/users/${user?.email}`, {
                 name: formData.name,
                 photo: formData.photo,
             });
