@@ -17,7 +17,7 @@ const Statistics = () => {
     });
 
     // Calculate counts
-    const totalUsers = users.length;
+    const totalUsers = users.filter((user) => user.role !== "admin").length;
     const normalUsers = users.filter((user) => (user.role === "user")).length;
     const premiumUsers = users.filter((user) => user.role === "premium").length;
 
