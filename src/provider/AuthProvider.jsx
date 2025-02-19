@@ -32,11 +32,19 @@ const AuthProvider = ({ children }) => {
         return signOut(auth);
     }
 
-    const updateUserProfile = (name, photo) => {
-        return updateProfile(auth.currentUser, {
-            displayName: name, photoURL: photo
-        });
-    }
+    const updateUserProfile = async (name, photo) => {
+        setLoading(true);
+        try {
+            await updateProfile(auth.currentUser, {
+                displayName: name,
+                photoURL: photo,
+            });
+            setUser({ ...auth.currentUser, displayName: name, photoURL: photo });
+        } finally {
+            setLoading(false);
+        }
+    };
+    
 
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, currentUser => {
