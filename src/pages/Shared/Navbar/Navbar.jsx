@@ -65,6 +65,9 @@ const Navbar = () => {
                         )}
                     </>
                 )}
+                <NavLink to="/about" className={({ isActive }) => (isActive ? "text-blue-500 font-bold border-b-4 border-b-blue-500" : "")}>
+                    About Us
+                </NavLink>
             </div>
             {user?.photoURL ? (
                 <div className="relative group flex flex-col lg:flex-row gap-3">

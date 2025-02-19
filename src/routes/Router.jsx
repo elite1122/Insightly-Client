@@ -22,6 +22,7 @@ import Profile from "../pages/Profile/Profile";
 import ErrorPage from "../component/ErrorPage/ErrorPage";
 import PrivateRoute from "./PrivateRoute";
 import AdminRoute from "./AdminRoute";
+import AboutUs from "../pages/AboutUs/AboutUs";
 
 
   export const router = createBrowserRouter([
@@ -83,11 +84,15 @@ import AdminRoute from "./AdminRoute";
         },
         {
             path: 'articles/:id',
-            element: <PrivateRoute><ArticleDetails></ArticleDetails></PrivateRoute>,
+            element: <ArticleDetails></ArticleDetails>,
         },
         {
             path: 'premiumArticles',
             element: <PrivateRoute><PremiumArticles></PremiumArticles></PrivateRoute>,
+        },
+        {
+            path: 'about',
+            element: <AboutUs></AboutUs>,
         },
         {
             path: 'profile',
