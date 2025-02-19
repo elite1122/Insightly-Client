@@ -2,10 +2,12 @@ import { Link, NavLink } from 'react-router-dom';
 import useAuth from '../../../hooks/useAuth';
 import { useQuery } from '@tanstack/react-query';
 import useAxiosPublic from '../../../hooks/useAxiosPublic';
+import useAdmin from '../../../hooks/useAdmin';
 
 const Navbar = () => {
     const { user, logOut, loading } = useAuth();
     const axiosPublic = useAxiosPublic();
+    const [isAdmin] = useAdmin();
 
     // Fetch user subscription status using useQuery
     const { data: userData, isLoading } = useQuery({
@@ -51,9 +53,11 @@ const Navbar = () => {
                         <NavLink to="/subscription" className={({ isActive }) => (isActive ? "text-blue-500 font-bold border-b-4 border-b-blue-500" : "")}>
                             Subscription
                         </NavLink>
-                        <NavLink to="/dashboard" className={({ isActive }) => (isActive ? "text-blue-500 font-bold border-b-4 border-b-blue-500" : "")}>
-                            Dashboard
-                        </NavLink>
+                        {isAdmin && (
+                            <NavLink to="/dashboard" className={({ isActive }) => (isActive ? "text-blue-500 font-bold border-b-4 border-b-blue-500" : "")}>
+                                Dashboard
+                            </NavLink>
+                        )}
                         <NavLink to="/myArticles" className={({ isActive }) => (isActive ? "text-blue-500 font-bold border-b-4 border-b-blue-500" : "")}>
                             My Articles
                         </NavLink>
