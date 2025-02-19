@@ -98,7 +98,7 @@ const Navbar = () => {
     );
 
     return (
-        <div className="shadow-md sticky top-0 z-50 transition-colors duration-300 text-black bg-gradient-to-r from-blue-300 via-purple-300 to-indigo-300 border-blue-500">
+        <div className="">
             <div className="flex justify-between w-11/12 mx-auto items-center py-3 flex-wrap">
                 {/* Logo */}
                 <div>

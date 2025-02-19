@@ -9,7 +9,7 @@ import { Link } from "react-router-dom";
 const Footer = () => {
     return (
         <div>
-            <footer className="bg-neutral text-neutral-content p-10">
+            <div className="p-10">
                 <div className="flex justify-center pb-12">
                     <img src="/assets/logo-footer.png" alt="" srcSet="" />
                 </div>
@@ -54,7 +54,7 @@ const Footer = () => {
                     <p className="text-center">Copyright © {new Date().getFullYear()} - All rights reserved by Rasheduzzaman Elite</p>
                 </div>
 
-            </footer>
+            </div>
         </div>
     );
 };
