@@ -3,7 +3,7 @@ import SectionTitle from "../../component/SectionTitle/SectionTitle";
 
 const AboutUs = () => {
     return (
-        <section className="min-h-screen dark:bg-gray-900">
+        <section className="min-h-screen dark:bg-gray-900 p-6">
             <Helmet>
                 <title>Insightly | About us</title>
             </Helmet>
@@ -43,7 +43,7 @@ const AboutUs = () => {
                 <div>
                     <a
                         href="/allArticles"
-                        className="btn btn-outline text-gray-700 dark:text-white"
+                        className="btn btn-primary"
                     >
                         Explore Articles
                     </a>
