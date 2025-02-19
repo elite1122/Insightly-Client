@@ -46,7 +46,7 @@ const ArticleDetails = () => {
     }, [id]);
 
     return (
-        <section className="bg-gradient-to-r from-yellow-400 via-red-500 to-pink-500 border-yellow-500 shadow-2xl transform min-h-screen p-4 md:p-8">
+        <section className="min-h-screen p-4 md:p-8">
             <Helmet>
                 <title>Insightly | Article Details</title>
             </Helmet>
