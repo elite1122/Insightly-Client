@@ -142,7 +142,7 @@ const Subscription = () => {
     };
 
     return (
-        <section className="min-h-screen bg-gradient-to-r from-yellow-400 via-red-500 to-pink-500 border-yellow-500 shadow-2xl transform">
+        <section className="min-h-screen">
             <Helmet><title>Insightly | Subscription</title></Helmet>
             {/* Banner */}
             <div className="bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500 text-center py-10 mb-8 shadow-lg">

@@ -92,7 +92,7 @@ const Profile = () => {
     return (
         <section>
             <Helmet><title>Insightly | Profile</title></Helmet>
-            <div className="p-6 min-h-screen bg-gradient-to-r from-yellow-400 via-red-500 to-pink-500 border-yellow-500 shadow-2xl transform">
+            <div className="p-6 min-h-screen">
                 <div className="max-w-2xl mx-auto bg-gradient-to-r from-blue-300 via-purple-300 to-indigo-300 border-blue-500 transform shadow-lg rounded-lg p-6">
                     <SectionTitle heading="User Profile" subHeading="Here you can edit your information"></SectionTitle>
                     <div className="flex flex-col items-center">

@@ -1,5 +1,4 @@
 import { Link, NavLink } from 'react-router-dom';
-import logo from '../../../assets/insightly.png';
 import useAuth from '../../../hooks/useAuth';
 import { useQuery } from '@tanstack/react-query';
 import useAxiosPublic from '../../../hooks/useAxiosPublic';
@@ -103,7 +102,9 @@ const Navbar = () => {
                 {/* Logo */}
                 <div>
                     <Link to={"/"}>
-                        <img className="w-16 h-12 btn object-cover" src={logo} alt="Logo" />
+                        <h1 className='text-2xl font-medium text-blue-600 uppercase'>
+                            Insightly
+                        </h1>
                     </Link>
                 </div>
 

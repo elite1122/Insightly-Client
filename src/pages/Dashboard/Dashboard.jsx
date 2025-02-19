@@ -10,7 +10,7 @@ const Dashboard = () => {
     };
 
     return (
-        <div className="bg-gradient-to-r from-yellow-400 via-red-500 to-pink-500 border-yellow-500 shadow-2xl transform">
+        <div className="">
             {/* Sidebar Toggle Button */}
             <button
                 className="flex btn btn-outline border-none text-gray-700 p-4 text-base font-bold"

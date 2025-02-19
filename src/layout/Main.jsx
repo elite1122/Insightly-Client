@@ -11,9 +11,11 @@ const Main = () => {
                     <Navbar></Navbar>
                 </nav>
             </section>
-            <div className='max-w-[1440px] mx-auto w-11/12'>
-                <Outlet></Outlet>
-            </div>
+            <section className='bg-gradient-to-r from-yellow-400 via-red-500 to-pink-500 border-yellow-500 shadow-2xl transform'>
+                <div className='max-w-[1440px] mx-auto w-11/12'>
+                    <Outlet></Outlet>
+                </div>
+            </section>
             <footer className='w-full bg-neutral text-neutral-content'>
                 <section className='max-w-[1440px] mx-auto w-11/12'>
                     <Footer></Footer>
