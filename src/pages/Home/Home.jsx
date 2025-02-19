@@ -6,6 +6,7 @@ import Plans from './Plans';
 import SubscriptionAd from './SubscriptionAd';
 import TopContributors from './TopContributors';
 import FrequentlyAskedQuestion from './FrequentlyAskedQuestion';
+import UserTestimonials from './UserTestimonials';
 
 const Home = () => {
     return (
@@ -15,6 +16,7 @@ const Home = () => {
             <Statistics></Statistics>
             <Plans></Plans>
             <TopContributors></TopContributors>
+            <UserTestimonials></UserTestimonials>
             <FrequentlyAskedQuestion></FrequentlyAskedQuestion>
             <SubscriptionAd></SubscriptionAd>
         </div>
