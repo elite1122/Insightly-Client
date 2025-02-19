@@ -7,6 +7,7 @@ import SubscriptionAd from './SubscriptionAd';
 import TopContributors from './TopContributors';
 import FrequentlyAskedQuestion from './FrequentlyAskedQuestion';
 import UserTestimonials from './UserTestimonials';
+import HowItWorks from './HowItWorks';
 
 const Home = () => {
     return (
@@ -15,6 +16,7 @@ const Home = () => {
             <AllPublishers></AllPublishers>
             <Statistics></Statistics>
             <Plans></Plans>
+            <HowItWorks></HowItWorks>
             <TopContributors></TopContributors>
             <UserTestimonials></UserTestimonials>
             <FrequentlyAskedQuestion></FrequentlyAskedQuestion>
