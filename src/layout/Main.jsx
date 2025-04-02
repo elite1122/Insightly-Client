@@ -11,7 +11,7 @@ const Main = () => {
                     <Navbar></Navbar>
                 </nav>
             </section>
-            <section className='bg-gradient-to-r from-yellow-400 via-red-500 to-pink-500 border-yellow-500 shadow-2xl transform'>
+            <section className='bg-white shadow-2xl transform'>
                 <div className='max-w-[1440px] mx-auto w-11/12'>
                     <Outlet></Outlet>
                 </div>
