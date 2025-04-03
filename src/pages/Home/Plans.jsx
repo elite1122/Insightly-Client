@@ -8,12 +8,12 @@ const Plans = () => {
     return (
         <section className="p-6">
             <SectionTitle heading="Choose Your Plan" subHeading="Find the perfect plan for your needs"></SectionTitle>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 max-w-4xl mx-auto">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 max-w-6xl mx-auto">
                 {/* Free Plan */}
-                <div className="bg-gray-100 border rounded-lg shadow-lg p-6 flex flex-col justify-between h-full">
+                <div className="bg-gradient-to-r from-blue-300 via-purple-300 to-indigo-300 border-blue-500 transform rounded-lg shadow-lg p-6 flex flex-col justify-between h-full hover:shadow-lg hover:scale-105 transition duration-300">
                     <div>
                         <h3 className="text-2xl font-semibold mb-4">Free Plan</h3>
-                        <ul className="list-disc pl-6 mb-4 text-gray-700">
+                        <ul className="list-disc pl-6 mb-4 text-gray-800">
                             <li>Access to basic features</li>
                             <li>Limited storage</li>
                             <li>Community support</li>
@@ -21,17 +21,17 @@ const Plans = () => {
                     </div>
                     <button
                         onClick={() => navigate("/subscription")}
-                        className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 mt-auto"
+                        className="btn btn-primary transform hover:scale-105 transition duration-300 text-lg font-semibold"
                     >
                         Subscribe Now
                     </button>
                 </div>
 
                 {/* Premium Plan */}
-                <div className="bg-yellow-100 border rounded-lg shadow-lg p-6 flex flex-col justify-between h-full">
+                <div className="bg-gradient-to-r from-blue-300 via-purple-300 to-indigo-300 border-blue-500 transform rounded-lg shadow-lg p-6 flex flex-col justify-between h-full hover:shadow-lg hover:scale-105 transition duration-300">
                     <div>
                         <h3 className="text-2xl font-semibold mb-4">Premium Plan</h3>
-                        <ul className="list-disc pl-6 mb-4 text-gray-700">
+                        <ul className="list-disc pl-6 mb-4 text-gray-800">
                             <li>Access to all features</li>
                             <li>Increased storage</li>
                             <li>Priority customer support</li>
@@ -40,7 +40,7 @@ const Plans = () => {
                     </div>
                     <button
                         onClick={() => navigate("/subscription")}
-                        className="bg-yellow-500 text-white py-2 px-4 rounded hover:bg-yellow-600 mt-auto"
+                        className="btn btn-primary transform hover:scale-105 transition duration-300 text-lg font-semibold"
                     >
                         Subscribe Now
                     </button>

@@ -8,7 +8,7 @@ const TopContributors = () => {
                 <SectionTitle heading="Top Contributors in Journalism" subHeading=" Meet the exceptional journalists and publishers who are reshaping the way we consume news with credibility and impact"></SectionTitle>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-6xl mx-auto">
                     {/* Contributor 1 */}
-                    <div className="bg-gradient-to-r from-blue-300 via-purple-300 to-indigo-300 border-blue-500 transform rounded-lg p-4 border flex flex-col items-center text-center">
+                    <div className="bg-gradient-to-r from-blue-300 via-purple-300 to-indigo-300 border-blue-500 transform rounded-lg p-4 border flex flex-col items-center text-center hover:shadow-lg hover:scale-105 transition duration-300">
                         <div tabIndex="0" role="button" className="btn btn-ghost btn-circle avatar">
                             <div className="w-10 rounded-full">
                                 <img
@@ -24,7 +24,7 @@ const TopContributors = () => {
                     </div>
 
                     {/* Contributor 2 */}
-                    <div className="bg-gradient-to-r from-blue-300 via-purple-300 to-indigo-300 border-blue-500 transform rounded-lg p-4 border flex flex-col items-center text-center">
+                    <div className="bg-gradient-to-r from-blue-300 via-purple-300 to-indigo-300 border-blue-500 transform rounded-lg p-4 border flex flex-col items-center text-center hover:shadow-lg hover:scale-105 transition duration-300">
                         <div tabIndex="0" role="button" className="btn btn-ghost btn-circle avatar">
                             <div className="w-10 rounded-full">
                                 <img

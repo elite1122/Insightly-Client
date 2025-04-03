@@ -37,7 +37,7 @@ const Statistics = () => {
                 ) : (
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
                         {/* Total Users */}
-                        <div className="bg-gradient-to-r from-teal-300 via-green-300 to-blue-300 border-teal-500 rounded-lg shadow-lg p-6 flex flex-col items-center text-center">
+                        <div className="bg-gradient-to-r from-teal-300 via-green-300 to-blue-300 border-teal-500 rounded-lg shadow-lg p-6 flex flex-col items-center text-center hover:shadow-lg hover:scale-105 transition duration-300">
                             <h3 className="text-2xl font-semibold mb-2">Total Users</h3>
                             <CountUp
                                 end={totalUsers}
@@ -47,7 +47,7 @@ const Statistics = () => {
                         </div>
 
                         {/* Normal Users */}
-                        <div className="bg-gradient-to-r from-yellow-300 via-orange-300 to-red-300 border-yellow-500 rounded-lg shadow-lg p-6 flex flex-col items-center text-center">
+                        <div className="bg-gradient-to-r from-yellow-300 via-orange-300 to-red-300 border-yellow-500 rounded-lg shadow-lg p-6 flex flex-col items-center text-center hover:shadow-lg hover:scale-105 transition duration-300">
                             <h3 className="text-2xl font-semibold mb-2">Normal Users</h3>
                             <CountUp
                                 end={normalUsers}
@@ -57,7 +57,7 @@ const Statistics = () => {
                         </div>
 
                         {/* Premium Users */}
-                        <div className="bg-gradient-to-r from-purple-300 via-indigo-300 to-pink-300 border-purple-500 rounded-lg shadow-lg p-6 flex flex-col items-center text-center">
+                        <div className="bg-gradient-to-r from-purple-300 via-indigo-300 to-pink-300 border-purple-500 rounded-lg shadow-lg p-6 flex flex-col items-center text-center hover:shadow-lg hover:scale-105 transition duration-300">
                             <h3 className="text-2xl font-semibold mb-2">Premium Users</h3>
                             <CountUp
                                 end={premiumUsers}
