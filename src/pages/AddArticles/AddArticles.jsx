@@ -163,7 +163,7 @@ const AddArticle = () => {
                                 className="textarea textarea-bordered bg-white text-black"
                                 placeholder="Type article description" />
                         </div>
-                        <button type="submit" className="btn btn-primary mt-3">Submit</button>
+                        <button type="submit" className="btn btn-primary text-md font-semibold mt-3">Submit</button>
                     </form>
                 </div>
             </div>

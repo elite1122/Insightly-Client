@@ -21,7 +21,7 @@ const Plans = () => {
                     </div>
                     <button
                         onClick={() => navigate("/subscription")}
-                        className="btn btn-primary transform hover:scale-105 transition duration-300 text-lg font-semibold"
+                        className="btn btn-primary transform hover:scale-105 transition duration-300 text-md font-semibold"
                     >
                         Subscribe Now
                     </button>
@@ -40,7 +40,7 @@ const Plans = () => {
                     </div>
                     <button
                         onClick={() => navigate("/subscription")}
-                        className="btn btn-primary transform hover:scale-105 transition duration-300 text-lg font-semibold"
+                        className="btn btn-primary transform hover:scale-105 transition duration-300 text-md font-semibold"
                     >
                         Subscribe Now
                     </button>
