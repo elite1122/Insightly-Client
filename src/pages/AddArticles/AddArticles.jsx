@@ -119,7 +119,7 @@ const AddArticle = () => {
                 <title>Insightly | Add Article</title>
             </Helmet>
             <div className="min-h-screen flex justify-center">
-                <div className="card w-full md:max-w-xl shadow-2xl p-10 bg-gradient-to-r from-blue-300 via-purple-300 to-indigo-300 border-blue-500 transform rounded-lg">
+                <div className="card w-full md:max-w-xl shadow-2xl p-10 bg-background transform rounded-lg">
                     <SectionTitle heading="Add New Article" subHeading="Please fill up the form to add a new article"></SectionTitle>
                     <form onSubmit={handleSubmit(onSubmit)} className="card-body">
                         <div className="form-control">
