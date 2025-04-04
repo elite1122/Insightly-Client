@@ -22,7 +22,7 @@ const Dashboard = () => {
             <div className={`drawer ${isDrawerOpen ? 'drawer-open' : ''}`}>
                 {/* Drawer container */}
                 <input id="dashboard-drawer" type="checkbox" className="drawer-toggle" checked={isDrawerOpen} readOnly />
-                <div className="drawer-content flex flex-col py-4 pl-5 bg-gradient-to-r from-blue-300 via-purple-300 to-indigo-300 border-blue-500 transform shadow-lg rounded-lg p-6">
+                <div className="drawer-content flex flex-col py-4 pl-5 bg-background transform rounded-lg p-6">
                     {/* Page content here */}
                     <Outlet />
                 </div>
@@ -34,7 +34,7 @@ const Dashboard = () => {
                         onClick={toggleDrawer}
                     ></label>
 
-                    <ul className="menu min-h-screen w-max bg-green-500 text-base rounded-lg">
+                    <ul className="menu min-h-screen w-max bg-gradient-to-r from-blue-300 via-purple-300 to-indigo-300 border-blue-500 transform text-base rounded-lg">
                     <li>
                         <NavLink to="/dashboard/adminHome" onClick={toggleDrawer}>
                             <FaHome /> Admin Home
