@@ -71,13 +71,13 @@ const Register = () => {
                 <title>Insightly | Sign Up</title>
             </Helmet>
 
-            <div className="min-h-screen flex justify-center bg-gradient-to-r from-yellow-400 via-red-500 to-pink-500 border-yellow-500 shadow-2xl transform">
+            <div className="min-h-screen flex justify-center bg-background w-2xl transform">
                 {loading ? (
                     <div className="flex justify-center items-center min-h-screen">
                         <span className="loading loading-bars loading-lg"></span>
                     </div>
                 ) : (
-                    <div className="card w-full max-w-xl shadow-2xl p-10 bg-gradient-to-r from-blue-300 via-purple-300 to-indigo-300 border-blue-500 transform rounded-lg">
+                    <div className="card w-full max-w-xl shadow-2xl p-10 transform rounded-lg my-10">
                         <SectionTitle heading="Sign Up" subHeading="Join us! Create your account today"></SectionTitle>
                         <form onSubmit={handleSubmit(onSubmit)} className="card-body">
                             <div className="form-control">
