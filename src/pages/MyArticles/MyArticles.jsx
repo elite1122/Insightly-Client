@@ -73,7 +73,7 @@ const MyArticles = () => {
             <Helmet>
                 <title>Insightly | My Articles</title>
             </Helmet>
-            <div className="min-h-screen bg-gradient-to-r from-blue-300 via-purple-300 to-indigo-300 border-blue-500 transform shadow-lg rounded-lg p-6">
+            <div className="min-h-screen bg-background transform rounded-lg p-6">
                 <SectionTitle heading="My Articles" subHeading="All your articles are here"></SectionTitle>
                 {articles.length === 0 ? (
                     <div className="flex flex-col items-center justify-center mt-10">
