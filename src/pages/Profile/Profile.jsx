@@ -5,7 +5,6 @@ import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { Helmet } from "react-helmet-async";
 import SectionTitle from "../../component/SectionTitle/SectionTitle";
 import useAxiosPublic from "../../hooks/useAxiosPublic";
-import { Placeholder } from "react-select/animated";
 
 const Profile = () => {
     const { user, updateUserProfile } = useAuth();
@@ -85,7 +84,7 @@ const Profile = () => {
         <section>
             <Helmet><title>Insightly | Profile</title></Helmet>
             <div className="p-6 min-h-screen">
-                <div className="bg-gradient-to-r from-blue-300 via-purple-300 to-indigo-300 border-blue-500 shadow-lg rounded-lg p-6">
+                <div className="bg-background shadow-lg rounded-lg p-6">
                     <SectionTitle heading="User Profile" subHeading="View and edit your profile information." />
                     <div className="flex flex-col items-center">
                         <img
