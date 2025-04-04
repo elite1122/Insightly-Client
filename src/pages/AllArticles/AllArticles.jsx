@@ -108,8 +108,8 @@ const AllArticles = () => {
                             <div
                                 key={article._id}
                                 className={`border p-6 rounded-lg shadow-lg transition-all duration-300 flex flex-col justify-between h-full ${article.isPremium
-                                    ? "bg-gradient-to-r from-yellow-400 via-red-500 to-pink-500 text-white border-yellow-500 shadow-2xl transform"
-                                    : "bg-gradient-to-r from-blue-400 via-purple-500 to-indigo-600 text-white border-blue-500 shadow-lg transform"
+                                    ? " text-gray-800 shadow-2xl transform"
+                                    : " text-gray-800 shadow-2xl transform"
                                 }`}
                             >
                                 <img
@@ -120,10 +120,10 @@ const AllArticles = () => {
                                 <div className="flex-1">
                                     <h3 className="text-2xl font-bold mt-4">{article.title}</h3>
                                     <p className="italic">{article.publisher}</p>
-                                    <p className="mt-2">{article.description}</p>
+                                    <p className="mt-2">{article.description?.split(" ").slice(0, 10).join(" ")}...</p>
                                 </div>
                                 <button
-                                    className="mt-4 btn btn-accent font-bold text-lg w-full"
+                                    className="mt-4 btn btn-primary font-semibold text-md w-full"
                                     onClick={() => navigate(`/articles/${article._id}`)}
                                     disabled={article.isPremium && !userInfo?.premiumTaken}
                                 >

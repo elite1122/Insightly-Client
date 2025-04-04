@@ -46,7 +46,7 @@ const ArticleDetails = () => {
     }, [id]);
 
     return (
-        <section className="min-h-screen p-4 md:p-8">
+        <section className="min-h-screen p-4 md:p-8 bg-background">
             <Helmet>
                 <title>Insightly | Article Details</title>
             </Helmet>
@@ -56,29 +56,32 @@ const ArticleDetails = () => {
                     <span className="loading loading-bars loading-lg"></span>
                 </div>
             ) : (
-                <div className="max-w-4xl mx-auto bg-gradient-to-r from-blue-300 via-purple-300 to-indigo-300 border-blue-500 transform shadow-md rounded-lg p-6">
-                    <SectionTitle heading={article.title} />
-
+                <div className="w-full p-8 grid md:grid-cols-2 gap-8">
+                    {/* Image Section - Left */}
                     {article.image && (
-                        <div className="w-full aspect-[16/9] overflow-hidden rounded-lg mb-6">
+                        <div className="w-full flex justify-center items-center">
                             <img
                                 src={article.image}
                                 alt={article.title}
-                                className="w-full h-full object-cover"
+                                className="rounded-lg shadow-md object-cover w-full h-auto max-h-96"
                             />
                         </div>
                     )}
 
-                    <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between text-gray-600 text-sm mb-4">
-                        <p>
-                            <strong className="text-gray-800">Publisher:</strong> {article.publisher || "Unknown"}
-                        </p>
+                    {/* Content Section - Right */}
+                    <div>
+                        <SectionTitle heading={article.title} />
+                        <div className="text-gray-600 text-sm mb-4">
+                            <p>
+                                <strong className="text-gray-800">Publisher:</strong> {article.publisher || "Unknown"}
+                            </p>
+
+                        </div>
+                        <p className="text-gray-700 leading-relaxed mb-4">{article.description}</p>
                         <p>
                             <strong className="text-gray-800">Views:</strong> {article.views || 0}
                         </p>
                     </div>
-
-                    <p className="text-gray-700 leading-relaxed">{article.description}</p>
                 </div>
             )}
         </section>
