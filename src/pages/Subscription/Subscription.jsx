@@ -145,7 +145,7 @@ const Subscription = () => {
         <section className="min-h-screen">
             <Helmet><title>Insightly | Subscription</title></Helmet>
             {/* Banner */}
-            <div className="bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500 text-center py-10 mb-8 shadow-lg">
+            <div className="bg-background">
                 <SectionTitle heading="Upgrade to Premium" subHeading="Enjoy exclusive features with our premium plan"></SectionTitle>
             </div>
 
