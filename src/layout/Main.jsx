@@ -1,43 +1,22 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { Outlet } from 'react-router-dom';
 import Footer from '../pages/Shared/Footer/Footer';
 import Navbar from '../pages/Shared/Navbar/Navbar';
 
 const Main = () => {
-    const [isScrolled, setIsScrolled] = useState(false);
-
-    useEffect(() => {
-        const handleScroll = () => {
-            setIsScrolled(window.scrollY > 10);
-        };
-
-        window.addEventListener('scroll', handleScroll);
-        return () => window.removeEventListener('scroll', handleScroll);
-    }, []);
-
     return (
         <div>
-            <section 
-                className={`w-full shadow-md sticky top-0 z-50 transition-colors duration-300 text-text bg-background backdrop-blur-md ${
-                    isScrolled ? 'bg-opacity-80 backdrop-blur-lg' : 'bg-opacity-100'
-                }`}
-            >
-                <nav className='max-w-[1440px] mx-auto w-11/12'>
-                    <Navbar />
-                </nav>
-            </section>
+            <div className="fixed top-0 left-0 right-0 z-50 w-full">
+                <Navbar />
+            </div>
 
-            <section className='bg-background shadow-2xl'>
-                <div className='max-w-[1440px] mx-auto w-11/12'>
+            <section className='bg-white shadow-2xl pt-[200px] sm:pt-[220px] lg:pt-[240px]'>
+                <div className='max-w-[1440px] mx-auto w-11/12 px-2 sm:px-4 lg:px-6'>
                     <Outlet />
                 </div>
             </section>
 
-            <footer className='w-full bg-neutral text-neutral-content'>
-                <section className='max-w-[1440px] mx-auto w-11/12'>
-                    <Footer />
-                </section>
-            </footer>
+            <Footer />
         </div>
     );
 };

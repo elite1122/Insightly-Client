@@ -1,5 +1,6 @@
 import { Navigate, useLocation } from "react-router";
 import useAuth from "../hooks/useAuth";
+import LoadingSpinner from "../component/LoadingSpinner/LoadingSpinner";
 
 
 const PrivateRoute = ({ children }) => {
@@ -7,7 +8,14 @@ const PrivateRoute = ({ children }) => {
     const location = useLocation();
 
     if (loading) {
-        return <div className="flex justify-center items-center min-h-screen"><span className="loading loading-bars loading-lg"></span></div>;
+        return (
+            <LoadingSpinner 
+                size="large" 
+                text="Authenticating..." 
+                variant="newspaper"
+                fullScreen={true}
+            />
+        );
     }
 
     if (user) {

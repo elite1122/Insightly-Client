@@ -1,6 +1,7 @@
 import { Navigate, useLocation } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
 import useAdmin from "../hooks/useAdmin";
+import LoadingSpinner from "../component/LoadingSpinner/LoadingSpinner";
 
 
 const AdminRoute = ({ children }) => {
@@ -9,7 +10,14 @@ const AdminRoute = ({ children }) => {
     const location = useLocation();
 
     if (loading || isAdminLoading) {
-        return <div className="flex justify-center items-center min-h-screen"><span className="loading loading-bars loading-lg"></span></div>;
+        return (
+            <LoadingSpinner 
+                size="large" 
+                text="Verifying admin access..." 
+                variant="newspaper"
+                fullScreen={true}
+            />
+        );
     }
 
     if (user && isAdmin) {

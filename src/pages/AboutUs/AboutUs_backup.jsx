@@ -162,6 +162,20 @@ const AboutUs = () => {
                         </div>
                     </div>
                 </div>
+                        
+                        <div className="text-center p-6 bg-white border-2 border-gray-700 shadow-lg">
+                            <div className="text-3xl mb-4">�</div>
+                            <h4 className="newspaper-meta font-black uppercase tracking-wider text-gray-900 mb-2">Responsive Design</h4>
+                            <p className="text-sm text-gray-600">Seamless experience across all devices and platforms</p>
+                        </div>
+                        
+                        <div className="text-center p-6 bg-white border-2 border-gray-700 shadow-lg">
+                            <div className="text-3xl mb-4">🌍</div>
+                            <h4 className="newspaper-meta font-black uppercase tracking-wider text-gray-900 mb-2">Global Reach</h4>
+                            <p className="text-sm text-gray-600">International news coverage from trusted sources worldwide</p>
+                        </div>
+                    </div>
+                </div>
 
                 {/* Call to Action */}
                 <div className="bg-white border-4 sm:border-8 border-gray-900 p-8 sm:p-12 lg:p-16 text-center newspaper-card shadow-2xl relative">

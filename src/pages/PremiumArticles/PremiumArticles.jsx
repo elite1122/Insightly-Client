@@ -4,6 +4,7 @@ import useAxiosPublic from "../../hooks/useAxiosPublic";
 import SectionTitle from "../../component/SectionTitle/SectionTitle";
 import { useNavigate } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
+import LoadingSpinner from "../../component/LoadingSpinner/LoadingSpinner";
 
 const PremiumArticles = () => {
     const axiosPublic = useAxiosPublic();
@@ -27,9 +28,11 @@ const PremiumArticles = () => {
                 <SectionTitle heading="Premium Articles" subHeading="Explore our premium content" />
 
                 {isLoading ? (
-                    <div className="flex justify-center items-center min-h-screen">
-                        <span className="loading loading-bars loading-lg"></span>
-                    </div>
+                    <LoadingSpinner 
+                        size="large" 
+                        text="Loading premium content..." 
+                        variant="newspaper"
+                    />
                 ) : (
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                         {premiumArticles.length > 0 ? (

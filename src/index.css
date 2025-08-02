@@ -1,3 +1,630 @@
+/* Import newspaper-style fonts */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800;900&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Crimson+Text:ital,wght@0,400;0,600;1,400&family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* CSS Reset for white space issues */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    overflow-x: hidden;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #ffffff; /* Pure white background for newspaper look */
+    color: #1f2937; /* Dark gray text for readability */
+}
+
+/* Custom animation delays */
+.animation-delay-300 {
+    animation-delay: 0.3s;
+}
+
+.animation-delay-500 {
+    animation-delay: 0.5s;
+}
+
+.animation-delay-1000 {
+    animation-delay: 1s;
+}
+
+/* Writing animation - pen rotation */
+@keyframes writeMotion {
+    0%, 100% { transform: rotate(12deg) translateY(0px); }
+    50% { transform: rotate(18deg) translateY(-2px); }
+}
+
+.animate-write {
+    animation: writeMotion 2s ease-in-out infinite;
+}
+
+/* Paper stack animation - floating effect */
+@keyframes paperFloat {
+    0%, 100% { transform: translateY(2px); }
+    50% { transform: translateY(-2px); }
+}
+
+.animate-paper-float {
+    animation: paperFloat 3s ease-in-out infinite;
+}
+
+/* Mobile-first responsive design */
+@media (max-width: 640px) {
+    .hover\:scale-102:hover {
+        transform: scale(1.01); /* Reduced scale for mobile */
+    }
+    
+    .hover\:-translate-y-1:hover {
+        transform: translateY(-2px); /* Reduced movement for mobile */
+    }
+    
+    /* Prevent zoom on input focus for iOS */
+    input, select, textarea {
+        font-size: 16px;
+    }
+}
+
+/* Disable animations on mobile for better performance */
+@media (prefers-reduced-motion: reduce) {
+    .animate-fadeInUp {
+        animation: none;
+    }
+    
+    .hover\:scale-102:hover,
+    .hover\:-translate-y-1:hover {
+        transform: none;
+    }
+}
+
+/* Smooth scrolling and animation optimizations */
+* {
+    will-change: auto;
+}
+
+.smooth-transition {
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    transform: translateZ(0); /* Force hardware acceleration */
+}
+
+/* Prevent layout shifts during sticky transitions */
+.sticky-container {
+    contain: layout style paint;
+}
+
+/* Enhanced navbar animations */
+.navbar-section {
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    transform: translateZ(0);
+}
+
+/* Smooth height transitions */
+.smooth-height {
+    transition: height 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+                padding 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+                opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+                transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Card animations */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.animate-fadeInUp {
+    animation: fadeInUp 0.6s ease-out forwards;
+}
+
+.animation-delay-150 {
+    animation-delay: 0.15s;
+}
+
+.animation-delay-300 {
+    animation-delay: 0.3s;
+}
+
+/* Mobile-friendly utilities */
+.touch-manipulation {
+    touch-action: manipulation;
+}
+
+.tap-highlight-transparent {
+    -webkit-tap-highlight-color: transparent;
+}
+
+/* Improve mobile scroll performance */
+.scroll-smooth {
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+}
+
+/* Newspaper-specific form styling */
+.newspaper-button {
+    position: relative;
+    overflow: hidden;
+}
+
+.newspaper-button:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+    transition: left 0.5s;
+}
+
+.newspaper-button:hover:before {
+    left: 100%;
+}
+
+/* React Select newspaper styling */
+.react-select__control {
+    border: 2px solid #d1d5db !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+}
+
+.react-select__control:hover,
+.react-select__control--is-focused {
+    border-color: #1f2937 !important;
+}
+
+.react-select__multi-value {
+    background-color: #1f2937 !important;
+    color: white !important;
+}
+
+.react-select__multi-value__label {
+    color: white !important;
+    font-size: 0.75rem !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.05em !important;
+}
+
+.react-select__multi-value__remove {
+    color: #fbbf24 !important;
+}
+
+.react-select__multi-value__remove:hover {
+    background-color: #ef4444 !important;
+    color: white !important;
+}
+
+/* Enhanced file input styling */
+input[type="file"] {
+    font-family: inherit;
+}
+
+input[type="file"]::-webkit-file-upload-button {
+    font-family: inherit;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-weight: 600;
+}
+
+/* Lottie animation container */
+.lottie-container {
+    filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.1));
+}
+
+/* Mobile-optimized newspaper card hover states */
+@media (hover: hover) and (pointer: fine) {
+    .newspaper-card:hover {
+        transform: translateY(-4px) scale(1.02);
+    }
+}
+
+@media (hover: none) and (pointer: coarse) {
+    .newspaper-card:active {
+        transform: translateY(-2px) scale(1.01);
+        transition-duration: 0.1s;
+    }
+}
+
+/* Pulse animation for interactive elements */
+@keyframes pulse-glow {
+    0%, 100% {
+        box-shadow: 0 0 5px rgba(255, 255, 255, 0.1);
+    }
+    50% {
+        box-shadow: 0 0 20px rgba(255, 255, 255, 0.2), 0 0 30px rgba(255, 255, 255, 0.1);
+    }
+}
+
+.pulse-glow {
+    animation: pulse-glow 2s ease-in-out infinite;
+}
+
+:root {
+    color-scheme: light;
+}
+
+/* Newspaper-style typography */
+.newspaper-headline {
+    font-family: 'Playfair Display', serif;
+    font-weight: 800;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+}
+
+.newspaper-subheadline {
+    font-family: 'Playfair Display', serif;
+    font-weight: 600;
+    line-height: 1.2;
+}
+
+.newspaper-body {
+    font-family: 'Crimson Text', serif;
+    line-height: 1.6;
+    font-size: 1.1rem;
+}
+
+.newspaper-meta {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.newspaper-author {
+    font-family: 'Lora', serif;
+    font-style: italic;
+}
+
+/* Newspaper-style borders and dividers */
+.newspaper-border {
+    border: 3px solid #1a1a1a;
+    border-radius: 0;
+}
+
+.newspaper-divider {
+    border-top: 2px solid #1a1a1a;
+    margin: 2rem 0;
+}
+
+.newspaper-thin-divider {
+    border-top: 1px solid #666;
+    margin: 1rem 0;
+}
+
+/* Article card styling for newspaper layout */
+.newspaper-card {
+    background: #fefefe;
+    border: 1px solid #e0e0e0;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+}
+
+.newspaper-card:hover {
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    transform: translateY(-2px);
+}
+
+/* Premium article styling */
+.premium-badge {
+    background: linear-gradient(45deg, #FFD700, #FFA500);
+    color: #1a1a1a;
+    font-weight: bold;
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+/* Breaking news style */
+.breaking-news {
+    background: #dc2626;
+    color: white;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.8; }
+}
+
+/* Column layout for newspaper-style content */
+.newspaper-columns {
+    column-count: 2;
+    column-gap: 2rem;
+    column-rule: 1px solid #e0e0e0;
+}
+
+@media (max-width: 768px) {
+    .newspaper-columns {
+        column-count: 1;
+    }
+}
+
+/* Dropcap for article beginnings */
+.dropcap::first-letter {
+    float: left;
+    font-family: 'Playfair Display', serif;
+    font-size: 4rem;
+    line-height: 3rem;
+    padding-right: 0.5rem;
+    padding-top: 0.25rem;
+    font-weight: 700;
+    color: #1a1a1a;
+}
+
+/* Custom slider dots for newspaper style */
+.newspaper-dots li button:before {
+    font-size: 16px;
+    color: #666;
+    opacity: 0.5;
+}
+
+.newspaper-dots li.slick-active button:before {
+    color: #1a1a1a;
+    opacity: 1;
+}
+
+/* Line clamp utilities */
+.line-clamp-2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.line-clamp-3 {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+/* Newspaper-style quotation marks */
+.newspaper-quote {
+    position: relative;
+    font-family: 'Crimson Text', serif;
+    font-style: italic;
+    font-size: 1.25rem;
+    line-height: 1.6;
+    padding: 2rem;
+    background: #f8f8f8;
+    border-left: 4px solid #1a1a1a;
+}
+
+.newspaper-quote::before {
+    content: '"';
+    font-family: 'Playfair Display', serif;
+    font-size: 4rem;
+    font-weight: 700;
+    position: absolute;
+    top: 0;
+    left: 1rem;
+    color: #1a1a1a;
+    opacity: 0.3;
+}
+
+/* Newspaper advertisement placeholder */
+.newspaper-ad {
+    background: repeating-linear-gradient(
+        45deg,
+        #f0f0f0,
+        #f0f0f0 10px,
+        #e0e0e0 10px,
+        #e0e0e0 20px
+    );
+    border: 2px dashed #999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 200px;
+}
+
+/* Newspaper byline */
+.newspaper-byline {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 0.875rem;
+    color: #666;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    border-top: 1px solid #e0e0e0;
+    border-bottom: 1px solid #e0e0e0;
+    padding: 0.5rem 0;
+    margin: 1rem 0;
+}
+
+/* Print-friendly styles for newspaper articles */
+@media print {
+    .newspaper-headline,
+    .newspaper-subheadline {
+        color: #000 !important;
+    }
+    
+    .newspaper-body {
+        color: #333 !important;
+        font-size: 12pt !important;
+        line-height: 1.4 !important;
+    }
+    
+    .newspaper-card {
+        box-shadow: none !important;
+        border: 1px solid #000 !important;
+    }
+    
+    .newspaper-border {
+        border: 2px solid #000 !important;
+    }
+}
+
+/* Accessibility improvements */
+.newspaper-headline:focus,
+.newspaper-subheadline:focus {
+    outline: 2px solid #1a1a1a;
+    outline-offset: 2px;
+}
+
+/* Mobile-first responsive improvements */
+@media (max-width: 640px) {
+    .newspaper-headline {
+        font-size: 2rem !important;
+        line-height: 1.2 !important;
+    }
+    
+    .newspaper-body {
+        font-size: 1rem !important;
+    }
+    
+    .dropcap::first-letter {
+        font-size: 3rem !important;
+        line-height: 2.5rem !important;
+    }
+}
+
+/* Subscription Page Enhancements */
+.subscription-plan-card {
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    transform: translateZ(0);
+}
+
+.subscription-plan-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+}
+
+.subscription-plan-card.featured {
+    animation: featuredPulse 2s ease-in-out infinite;
+}
+
+@keyframes featuredPulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.02); }
+}
+
+.subscription-feature-item {
+    animation: slideInLeft 0.6s ease-out;
+}
+
+@keyframes slideInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.subscription-payment-form {
+    animation: fadeInUp 0.8s ease-out;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.loading-spinner {
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+/* Stripe Elements Styling */
+.StripeElement {
+    background-color: white;
+    padding: 12px;
+    border: 2px solid #e5e7eb;
+    border-radius: 8px;
+    transition: border-color 0.3s ease;
+}
+
+.StripeElement:focus {
+    border-color: #1a1a1a;
+    outline: none;
+}
+
+.StripeElement--invalid {
+    border-color: #ef4444;
+}
+
+/* Custom SweetAlert2 styling for subscription */
+.swal2-popup.newspaper-alert {
+    font-family: 'Libre Baskerville', serif;
+    border: 3px solid #1a1a1a;
+}
+
+.swal2-title.newspaper-title {
+    font-family: 'Playfair Display', serif;
+    color: #1a1a1a;
+}
+
+.swal2-content.newspaper-content {
+    font-family: 'Crimson Text', serif;
+    color: #374151;
+}
+
+/* Enhanced Loading Animations */
+@keyframes newspaper-spin {
+    0% { transform: rotate(0deg) scale(1); }
+    50% { transform: rotate(180deg) scale(1.1); }
+    100% { transform: rotate(360deg) scale(1); }
+}
+
+@keyframes newspaper-pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.7; transform: scale(0.95); }
+}
+
+@keyframes loading-dots {
+    0%, 20% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+    80%, 100% { transform: translateY(0); }
+}
+
+.newspaper-spinner {
+    animation: newspaper-spin 2s ease-in-out infinite;
+}
+
+.newspaper-pulse {
+    animation: newspaper-pulse 1.5s ease-in-out infinite;
+}
+
+.loading-dot {
+    animation: loading-dots 1.4s ease-in-out infinite;
+}
+
+.loading-dot:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.loading-dot:nth-child(3) {
+    animation-delay: 0.4s;
+}  
