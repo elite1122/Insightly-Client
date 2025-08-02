@@ -2,10 +2,14 @@ import React from 'react';
 import { Outlet } from 'react-router-dom';
 import Footer from '../pages/Shared/Footer/Footer';
 import Navbar from '../pages/Shared/Navbar/Navbar';
+import ScrollToTop from '../component/ScrollToTop/ScrollToTop';
 
 const Main = () => {
     return (
         <div>
+            {/* Scroll to top on route change */}
+            <ScrollToTop />
+            
             <div className="fixed top-0 left-0 right-0 z-50 w-full">
                 <Navbar />
             </div>
